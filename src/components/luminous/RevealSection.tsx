@@ -104,33 +104,18 @@ export function RevealSection() {
 
       {/* Floating Festive Toast (Easter Egg) */}
       {showCelebrationBadge && (
-        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[130] pointer-events-none w-[92vw] max-w-md animate-in fade-in slide-in-from-top-6 duration-700 ease-out">
-          <div className="relative overflow-hidden rounded-2xl border border-gold/35 bg-plum/85 p-5 text-center shadow-[0_0_50px_rgba(230,160,68,0.35),0_16px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
-            {/* Subtle background golden flare */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-10 left-1/2 h-28 w-44 -translate-x-1/2 rounded-full bg-gold/20 blur-2xl"
-            />
-
-            <div className="relative flex flex-col items-center">
-              <span className="text-2xl drop-shadow-[0_0_14px_rgba(230,160,68,0.85)]">🪔</span>
-
-              <h4 className="mt-2 font-brand text-sm sm:text-base font-bold tracking-[0.16em] uppercase text-ivory">
+        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in slide-in-from-top-4 duration-500 ease-out">
+          <div className="relative flex items-center gap-2.5 rounded-full border border-gold/40 bg-plum/85 px-4 py-2 shadow-[0_0_30px_rgba(230,160,68,0.35),0_8px_20px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+            <span className="text-base select-none">🪔</span>
+            <div className="flex flex-col text-left">
+              <span className="font-brand text-[0.74rem] font-bold tracking-[0.14em] uppercase text-ivory leading-tight">
                 Happy Diwali from Team EDC
-              </h4>
-
-              <p className="mt-1 font-serif text-sm italic text-gold/90">
-                May your night shine as bright as a thousand diyas ✨
-              </p>
-
-              <div className="mt-3 flex items-center justify-center gap-2.5">
-                <span className="h-px w-6 bg-gold/30" />
-                <span className="font-sans text-[0.62rem] font-medium tracking-[0.22em] uppercase text-ivory/60">
-                  LUMINOUS 10.0 · NIT Durgapur
-                </span>
-                <span className="h-px w-6 bg-gold/30" />
-              </div>
+              </span>
+              <span className="font-serif text-[0.7rem] italic text-gold leading-tight">
+                LUMINOUS 10.0 · NIT Durgapur
+              </span>
             </div>
+            <span className="text-xs text-gold select-none">✨</span>
           </div>
         </div>
       )}
