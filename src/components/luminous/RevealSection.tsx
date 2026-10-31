@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { event, lightLogo } from "@/data/luminous";
 import { RegisterButton } from "./RegisterButton";
 import { Diya } from "./Diya";
+import { DiwaliFireworks } from "./DiwaliFireworks";
 import { gsap, useGSAP, prefersReduced } from "./gsap";
 
 const TBA = "To be announced";
@@ -36,6 +37,50 @@ export function RevealSection() {
     { scope: ref },
   );
 
+  const [fireworksActive, setFireworksActive] = useState(false);
+  const [triggerCount, setTriggerCount] = useState(0);
+  const [origin, setOrigin] = useState<{ x: number; y: number } | null>(null);
+  const [showCelebrationBadge, setShowCelebrationBadge] = useState(false);
+  const [isRangoliPulsing, setIsRangoliPulsing] = useState(false);
+  const rangoliRef = useRef<HTMLDivElement>(null);
+  const lastTapRef = useRef<number>(0);
+
+  const triggerFireworks = () => {
+    if (rangoliRef.current) {
+      const rect = rangoliRef.current.getBoundingClientRect();
+      setOrigin({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+      });
+    }
+    setFireworksActive(true);
+    setTriggerCount((prev) => prev + 1);
+    setShowCelebrationBadge(true);
+    setIsRangoliPulsing(true);
+
+    window.setTimeout(() => {
+      setIsRangoliPulsing(false);
+    }, 1200);
+
+    window.setTimeout(() => {
+      setShowCelebrationBadge(false);
+    }, 5500);
+  };
+
+  const handleRangoliClick = () => {
+    const now = Date.now();
+    if (now - lastTapRef.current < 380) {
+      triggerFireworks();
+      lastTapRef.current = 0;
+    } else {
+      lastTapRef.current = now;
+    }
+  };
+
+  const handleRangoliDoubleClick = () => {
+    triggerFireworks();
+  };
+
   const details = [
     { k: "Edition", v: event.edition || TBA },
     { k: "Time", v: event.time },
@@ -49,11 +94,60 @@ export function RevealSection() {
       ref={ref}
       className="section-light relative px-6 py-20 md:py-28 overflow-hidden"
     >
+      {/* Full-screen Fireworks Canvas */}
+      <DiwaliFireworks
+        isActive={fireworksActive}
+        triggerKey={triggerCount}
+        origin={origin}
+        onDone={() => setFireworksActive(false)}
+      />
+
+      {/* Floating Festive Toast */}
+      {showCelebrationBadge && (
+        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in zoom-in-95 duration-500">
+          <div className="flex items-center gap-3 rounded-full border border-gold/40 bg-plum/90 px-6 py-2.5 shadow-[0_0_35px_rgba(230,160,68,0.4)] backdrop-blur-md">
+            <span className="text-xl">🪔</span>
+            <div className="flex flex-col items-center text-center">
+              <span className="font-brand text-xs font-bold uppercase tracking-[0.22em] text-gold">
+                Shubh Diwali
+              </span>
+              <span className="text-[0.68rem] tracking-wider text-ivory/80 font-sans">
+                LUMINOUS 10.0 · EDC NIT Durgapur
+              </span>
+            </div>
+            <span className="text-xl">✨</span>
+          </div>
+        </div>
+      )}
+
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left: Rangoli artwork in responsive square */}
-          <div className="flex items-center justify-center lg:col-span-5">
-            <div className="rangoli-stage w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[480px]">
+          {/* Left: Rangoli artwork in responsive square with interactive fireworks trigger */}
+          <div className="flex flex-col items-center justify-center lg:col-span-5">
+            <div
+              ref={rangoliRef}
+              role="button"
+              tabIndex={0}
+              aria-label="Double-click to ignite Diwali fireworks"
+              title="Double-click the rangoli for Diwali fireworks!"
+              onClick={handleRangoliClick}
+              onDoubleClick={handleRangoliDoubleClick}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  triggerFireworks();
+                }
+              }}
+              className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-all duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.02] active:scale-[0.98] ${
+                isRangoliPulsing
+                  ? "scale-105 filter drop-shadow-[0_0_35px_rgba(230,160,68,0.7)]"
+                  : ""
+              }`}
+            >
+              {/* Expanding golden shockwave ring on trigger */}
+              {isRangoliPulsing && (
+                <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-gold/70 animate-ping" />
+              )}
               <svg
                 viewBox="0 0 400 400"
                 aria-hidden="true"
@@ -164,6 +258,21 @@ export function RevealSection() {
                 })}
               </svg>
             </div>
+
+            {/* Visual hint / celebration status pill */}
+            <p className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-ivory/50 px-3.5 py-1 text-xs font-medium text-foreground/80 shadow-xs backdrop-blur-xs select-none transition-all duration-300 hover:border-gold/50 hover:text-gold">
+              {showCelebrationBadge ? (
+                <>
+                  <span className="text-sm">🎆</span>
+                  <span className="font-semibold text-gold">Diwali Fireworks Ignited!</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-gold">✨</span>
+                  <span>Double-click rangoli for fireworks</span>
+                </>
+              )}
+            </p>
           </div>
 
           {/* Right: Event Details & Brand Lockup */}
