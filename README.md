@@ -69,7 +69,6 @@ The project is deployed in [Vercel](https://edc-luminous26.vercel.app/).
 
 ---
 
-
 ## 📜 License
 
 MIT – Feel free to use, modify, and share.

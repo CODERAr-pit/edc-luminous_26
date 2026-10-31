@@ -19,9 +19,10 @@ function getSupabase() {
 }
 
 export const registrationSchema = z.object({
-  team_name: z.string().min(1, "Team name is required").max(100),
-  team_leader: z.string().min(1, "Team leader name is required").max(100),
-  team_leader_email: z.string().email("Invalid email address"),
+  team_name: z.string().trim().min(1, "Team name is required").max(100),
+  team_leader: z.string().trim().min(1, "Team leader name is required").max(100),
+  team_leader_reg_no: z.string().trim().min(1, "Registration number is required").max(50),
+  team_leader_email: z.string().trim().email("Invalid email address"),
   team_leader_whatsapp: z
     .string()
     .length(10, "WhatsApp number must be 10 digits")
@@ -68,6 +69,7 @@ async function syncRegistrationToGoogleSheets(data: RegistrationData, screenshot
       registration: {
         team_name: data.team_name,
         team_leader: data.team_leader,
+        team_leader_reg_no: data.team_leader_reg_no,
         team_leader_email: data.team_leader_email,
         team_leader_whatsapp: data.team_leader_whatsapp,
         member1_name: data.member1_name,
@@ -124,6 +126,7 @@ export const submitRegistration = createServerFn({ method: "POST" })
       {
         team_name: data.team_name,
         team_leader: data.team_leader,
+        team_leader_reg_no: data.team_leader_reg_no,
         team_leader_email: data.team_leader_email,
         team_leader_whatsapp: data.team_leader_whatsapp,
         member1_name: data.member1_name,

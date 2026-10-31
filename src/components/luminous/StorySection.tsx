@@ -4,30 +4,93 @@ import { gsap, useGSAP, prefersReduced } from "./gsap";
 import { ChapterSlideshow, type SlideItem } from "./ChapterSlideshow";
 
 const INTRO_PHOTOS: SlideItem[] = [
-  { media: photos.diyaSpiral, title: "Diya Spiral", desc: "Every flame placed by hand in a glowing courtyard motif" },
-  { media: photos.introRangoliGroup, title: "Rangoli Circle", desc: "EDC members gathered around vibrant festival artwork" },
-  { media: photos.introGroupGlow, title: "EDC Community", desc: "Togetherness and warmth in traditional festive attire" },
-  { media: photos.introCelebrationGift, title: "Sweet Celebrations", desc: "Sharing joyful smiles and festival gifts" },
-  { media: photos.introDiyaFormation, title: "Courtyard Diya Glow", desc: "Golden flame constellation lighting up the night" },
+  {
+    media: photos.diyaSpiral,
+    title: "Diya Spiral",
+    desc: "Every flame placed by hand in a glowing courtyard motif",
+  },
+  {
+    media: photos.introRangoliGroup,
+    title: "Rangoli Circle",
+    desc: "EDC members gathered around vibrant festival artwork",
+  },
+  {
+    media: photos.introGroupGlow,
+    title: "EDC Community",
+    desc: "Togetherness and warmth in traditional festive attire",
+  },
+  {
+    media: photos.introCelebrationGift,
+    title: "Sweet Celebrations",
+    desc: "Sharing joyful smiles and festival gifts",
+  },
+  {
+    media: photos.introDiyaFormation,
+    title: "Courtyard Diya Glow",
+    desc: "Golden flame constellation lighting up the night",
+  },
 ];
 
 const PRELIM_PHOTOS: SlideItem[] = [
-  { media: photos.prelimMentor, title: "Mentorship & Joy", desc: "EDC mentors guiding kids with care and warmth" },
-  { media: photos.prelimGirl, title: "Young Artist", desc: "Carefully painting handcrafted clay diyas" },
-  { media: photos.prelimBoy, title: "Focus & Craft", desc: "Brushing vibrant colours onto the earthenware" },
-  { media: photos.prelimRings, title: "Intricate Detail", desc: "Concentric rings hand-painted with precision" },
-  { media: photos.prelimPavilion, title: "The Workshop Pavilion", desc: "Pavilion filled with young creators and students" },
-  { media: photos.prelimCheering, title: "Pure Celebration", desc: "Joyful smiles and hands raised in high spirits" },
+  {
+    media: photos.prelimMentor,
+    title: "Mentorship & Joy",
+    desc: "EDC mentors guiding kids with care and warmth",
+  },
+  {
+    media: photos.prelimGirl,
+    title: "Young Artist",
+    desc: "Carefully painting handcrafted clay diyas",
+  },
+  {
+    media: photos.prelimBoy,
+    title: "Focus & Craft",
+    desc: "Brushing vibrant colours onto the earthenware",
+  },
+  {
+    media: photos.prelimRings,
+    title: "Intricate Detail",
+    desc: "Concentric rings hand-painted with precision",
+  },
+  {
+    media: photos.prelimPavilion,
+    title: "The Workshop Pavilion",
+    desc: "Pavilion filled with young creators and students",
+  },
+  {
+    media: photos.prelimCheering,
+    title: "Pure Celebration",
+    desc: "Joyful smiles and hands raised in high spirits",
+  },
 ];
 
 const RANGOLI_PHOTOS: SlideItem[] = [
-  { media: photos.rangoli, title: "Floral Rangoli Canvas", desc: "Intricate petals and vibrant powders surrounding a central flame" },
-  { media: photos.rangoliCenterDiya, title: "Lit Diya Centerpiece", desc: "Five-wick painted diya glowing at the heart of the rangoli" },
-  { media: photos.rangoliDisplay, title: "Handcrafted Diya Showcase", desc: "Student team presenting the collection of decorated diyas" },
-  { media: photos.introRangoliGroup, title: "Artistry & Teamwork", desc: "College groups gathering around their vibrant floor creations" },
-  { media: photos.introDiyaFormation, title: "Floor of Radiance", desc: "Glowing constellation of earthen diyas illuminating the campus" },
+  {
+    media: photos.rangoli,
+    title: "Floral Rangoli Canvas",
+    desc: "Intricate petals and vibrant powders surrounding a central flame",
+  },
+  {
+    media: photos.rangoliCenterDiya,
+    title: "Lit Diya Centerpiece",
+    desc: "Five-wick painted diya glowing at the heart of the rangoli",
+  },
+  {
+    media: photos.rangoliDisplay,
+    title: "Handcrafted Diya Showcase",
+    desc: "Student team presenting the collection of decorated diyas",
+  },
+  {
+    media: photos.introRangoliGroup,
+    title: "Artistry & Teamwork",
+    desc: "College groups gathering around their vibrant floor creations",
+  },
+  {
+    media: photos.introDiyaFormation,
+    title: "Floor of Radiance",
+    desc: "Glowing constellation of earthen diyas illuminating the campus",
+  },
 ];
-
 
 export function StorySection() {
   const ref = useRef<HTMLElement>(null);
@@ -39,12 +102,25 @@ export function StorySection() {
         gsap.fromTo(
           el.querySelector(".ch-media"),
           { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 1.3, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 85%" } },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.3,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 85%" },
+          },
         );
         gsap.fromTo(
           el.querySelectorAll(".ch-text > *"),
           { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, stagger: 0.1, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 65%" } },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.9,
+            ease: "power3.out",
+            scrollTrigger: { trigger: el, start: "top 65%" },
+          },
         );
       });
     },
@@ -69,11 +145,15 @@ export function StorySection() {
           <div className="ch-text md:col-span-5">
             <p className="chapter-label text-gold">Chapter 01 — Introduction</p>
             <h3 className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
-              A Diwali of <span className="font-serif font-normal italic text-gold">creativity, community & light.</span>
+              A Diwali of{" "}
+              <span className="font-serif font-normal italic text-gold">
+                creativity, community & light.
+              </span>
             </h3>
             <div className="my-7 h-px w-16 bg-gold shadow-flame" />
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              LUMINOUS 10.0 is EDC NIT Durgapur's Diwali celebration — an evening where the campus gathers to create, to come together, and to light up the night.
+              LUMINOUS 10.0 is EDC NIT Durgapur's Diwali celebration — an evening where the campus
+              gathers to create, to come together, and to light up the night.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
               Every flame is placed by hand. Every pattern is made by people who showed up.
@@ -90,14 +170,17 @@ export function StorySection() {
           <div className="ch-text md:col-span-5">
             <p className="chapter-label text-vermilion">Chapter 02 — Pre-Luminous · BMEP × EDC</p>
             <h3 className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
-              Diyas, coloured <span className="font-serif font-normal italic text-vermilion">by hand.</span>
+              Diyas, coloured{" "}
+              <span className="font-serif font-normal italic text-vermilion">by hand.</span>
             </h3>
             <div className="my-7 h-px w-16 bg-gold shadow-flame" />
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              In Pre-Luminous, run by BMEP together with EDC, participants colour and decorate diyas — each one becoming a small piece of art.
+              In Pre-Luminous, run by BMEP together with EDC, participants colour and decorate diyas
+              — each one becoming a small piece of art.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              The finished diyas are then sold to professors and campus members. The proceeds and diyas used for the activity bring warm support to local communities.
+              The finished diyas are then sold to professors and campus members. The proceeds and
+              diyas used for the activity bring warm support to local communities.
             </p>
             <div className="mt-6 flex flex-wrap gap-2 text-xs">
               <span className="rounded-full border border-border/60 bg-ivory/40 px-3 py-1 font-medium text-foreground">
@@ -113,21 +196,34 @@ export function StorySection() {
             <ChapterSlideshow slides={RANGOLI_PHOTOS} interval={4500} />
           </div>
           <div className="ch-text md:col-span-5">
-            <p className="chapter-label text-antique">Chapter 03 — Luminous · Rangoli Competition</p>
+            <p className="chapter-label text-antique">
+              Chapter 03 — Luminous · Rangoli Competition
+            </p>
             <h3 className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
-              The ground <span className="font-serif font-normal italic text-antique">becomes a canvas.</span>
+              The ground{" "}
+              <span className="font-serif font-normal italic text-antique">becomes a canvas.</span>
             </h3>
             <div className="my-7 h-px w-16 bg-gold shadow-flame" />
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              In Luminous, college students form groups and create intricate floral and geometric rangoli designs together across the campus floor.
+              In Luminous, college students form groups and create intricate floral and geometric
+              rangoli designs together across the campus floor.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              A panel of judges evaluates every vibrant creation, celebrating the spirit of Diwali and rewarding the most captivating artistry.
+              A panel of judges evaluates every vibrant creation, celebrating the spirit of Diwali
+              and rewarding the most captivating artistry.
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs">
+              <span className="rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 font-medium text-foreground">
+                Rangoli Entry Fee:{" "}
+                <strong className="font-semibold text-gold">₹100 per team</strong>
+              </span>
+              <span className="rounded-full border border-border/60 bg-ivory/40 px-3 py-1 font-medium text-muted-foreground">
+                Teams of 4
+              </span>
+            </div>
           </div>
         </article>
       </div>
-
     </section>
   );
 }

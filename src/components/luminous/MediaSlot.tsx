@@ -2,7 +2,15 @@ import type { Media } from "@/data/luminous";
 import { cn } from "@/lib/utils";
 
 /** Renders real media when `src` is set, otherwise a clearly replaceable placeholder. */
-export function MediaSlot({ media: m, className, eager }: { media: Media | undefined; className?: string; eager?: boolean }) {
+export function MediaSlot({
+  media: m,
+  className,
+  eager,
+}: {
+  media: Media | undefined;
+  className?: string;
+  eager?: boolean;
+}) {
   const media: Media = m ?? { type: "image", src: "", alt: "", label: "Media" };
   if (media.src) {
     return media.type === "video" ? (

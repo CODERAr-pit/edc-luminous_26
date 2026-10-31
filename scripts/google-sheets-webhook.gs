@@ -20,6 +20,7 @@ function doPost(request) {
       new Date(),
       registration.team_name,
       registration.team_leader,
+      registration.team_leader_reg_no || "",
       registration.team_leader_email,
       registration.team_leader_whatsapp,
       registration.member1_name,
@@ -47,10 +48,22 @@ function getSheet() {
   if (!sheet) sheet = spreadsheet.insertSheet(SHEET_NAME);
   if (sheet.getLastRow() === 0) {
     sheet.appendRow([
-      "Received At", "Team Name", "Leader", "Email", "WhatsApp",
-      "Member 1", "Member 1 Number", "Member 2", "Member 2 Number",
-      "Member 3", "Member 3 Number", "Screenshot Path", "Submitted At",
-      "Status", "Notes",
+      "Received At",
+      "Team Name",
+      "Leader",
+      "Leader Reg No",
+      "Email",
+      "WhatsApp",
+      "Member 1",
+      "Member 1 Number",
+      "Member 2",
+      "Member 2 Number",
+      "Member 3",
+      "Member 3 Number",
+      "Screenshot Path",
+      "Submitted At",
+      "Status",
+      "Notes",
     ]);
     sheet.setFrozenRows(1);
   }
@@ -58,6 +71,7 @@ function getSheet() {
 }
 
 function json(value) {
-  return ContentService.createTextOutput(JSON.stringify(value))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(value)).setMimeType(
+    ContentService.MimeType.JSON,
+  );
 }

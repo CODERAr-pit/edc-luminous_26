@@ -7,7 +7,14 @@ describe("Registration availability", () => {
     expect(registrationHref({ registrationOpen: true, registrationUrl: "" })).toBeNull();
   });
   it("keeps registration closed until organisers open it", () => {
-    expect(registrationHref({ registrationOpen: false, registrationUrl: "https://example.com/register" })).toBeNull();
-    expect(registrationHref({ registrationOpen: true, registrationUrl: "https://example.com/register" })).toBe("https://example.com/register");
+    expect(
+      registrationHref({
+        registrationOpen: false,
+        registrationUrl: "https://example.com/register",
+      }),
+    ).toBeNull();
+    expect(
+      registrationHref({ registrationOpen: true, registrationUrl: "https://example.com/register" }),
+    ).toBe("https://example.com/register");
   });
 });

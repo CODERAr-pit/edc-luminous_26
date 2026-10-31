@@ -15,11 +15,7 @@ interface ChapterSlideshowProps {
   className?: string;
 }
 
-export function ChapterSlideshow({
-  slides,
-  interval = 4500,
-  className,
-}: ChapterSlideshowProps) {
+export function ChapterSlideshow({ slides, interval = 4500, className }: ChapterSlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -99,9 +95,7 @@ export function ChapterSlideshow({
           <p className="font-serif text-xl font-medium text-ivory drop-shadow-sm transition-all duration-300">
             {activeSlide?.title}
           </p>
-          <p className="mt-0.5 text-xs text-ivory/80 drop-shadow-sm">
-            {activeSlide?.desc}
-          </p>
+          <p className="mt-0.5 text-xs text-ivory/80 drop-shadow-sm">{activeSlide?.desc}</p>
         </div>
 
         {/* Subtle timer progress line */}
@@ -142,7 +136,9 @@ export function ChapterSlideshow({
 
         {/* Top-right slide counter & pause indicator */}
         <div className="absolute right-3 top-3 z-30 flex items-center gap-1.5 rounded-full bg-plum/60 px-2.5 py-1 text-[0.65rem] font-medium tabular-nums text-ivory/85 backdrop-blur">
-          <span>{currentIndex + 1} / {slides.length}</span>
+          <span>
+            {currentIndex + 1} / {slides.length}
+          </span>
           <button
             type="button"
             onClick={() => setIsPaused((p) => !p)}

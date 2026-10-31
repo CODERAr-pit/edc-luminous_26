@@ -1,6 +1,14 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { event } from "@/data/luminous";
 import { registrationHref } from "@/lib/registration";
 
@@ -12,14 +20,22 @@ export function RegisterButton({
   size?: "default" | "sm" | "lg" | "icon";
 }) {
   const href = registrationHref(event);
-  if (href)
+  if (href) {
+    const isInternal = href.startsWith("/");
     return (
       <Button asChild size={size} className={className}>
-        <a href={href}>
-          Register <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
-        </a>
+        {isInternal ? (
+          <Link to={href}>
+            Register <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+          </Link>
+        ) : (
+          <a href={href}>
+            Register <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+          </a>
+        )}
       </Button>
     );
+  }
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -30,7 +46,10 @@ export function RegisterButton({
       <DialogContent className="section-light max-w-[calc(100%-2rem)] sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Registration coming soon</DialogTitle>
-          <DialogDescription>Registration for LUMINOUS 10.0 has not opened yet. The registration link will be available here when it opens.</DialogDescription>
+          <DialogDescription>
+            Registration for LUMINOUS 10.0 has not opened yet. The registration link will be
+            available here when it opens.
+          </DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>

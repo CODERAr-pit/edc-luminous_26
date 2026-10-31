@@ -26,7 +26,9 @@ export function Navbar() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 flex items-center justify-between px-3.5 py-3 transition-all duration-500 sm:px-6 sm:py-4 md:px-10 md:py-5",
-          scrolled || open ? "bg-plum/95 backdrop-blur-md shadow-md" : "bg-plum/30 backdrop-blur-sm",
+          scrolled || open
+            ? "bg-plum/95 backdrop-blur-md shadow-md"
+            : "bg-plum/30 backdrop-blur-sm",
         )}
       >
         {/* Left — logo lockup */}
@@ -98,9 +100,7 @@ export function Navbar() {
             </a>
           ))}
           <div className="mt-4 border-t border-ivory/10 pt-6">
-            <RegisterButton
-              className="h-11 w-full justify-center text-sm font-semibold"
-            />
+            <RegisterButton className="h-11 w-full justify-center text-sm font-semibold" />
           </div>
         </div>
       )}

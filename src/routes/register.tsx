@@ -11,6 +11,10 @@ import {
   Mail,
   Phone,
   CreditCard,
+  IdCard,
+  Download,
+  Copy,
+  Check,
   Loader2,
   ChevronRight,
   AlertCircle,
@@ -51,6 +55,7 @@ function RegisterPage() {
   const step1Fields: (keyof RegistrationData)[] = [
     "team_name",
     "team_leader",
+    "team_leader_reg_no",
     "team_leader_email",
     "team_leader_whatsapp",
     "member1_name",
@@ -147,7 +152,12 @@ function RegisterPage() {
         <div className="relative z-10 border-b border-border/30 bg-slate/50 backdrop-blur-sm">
           <div className="mx-auto max-w-4xl px-6 py-3">
             <div className="flex items-center gap-2 text-sm">
-              <StepPill active={step === "form"} done={step === "payment"} n={1} label="Team Details" />
+              <StepPill
+                active={step === "form"}
+                done={step === "payment"}
+                n={1}
+                label="Team Details"
+              />
               <ChevronRight className="size-3.5 text-muted-foreground/50" />
               <StepPill active={step === "payment"} done={false} n={2} label="Payment" />
             </div>
@@ -180,18 +190,37 @@ function RegisterPage() {
 }
 
 /* ---------- Step Pill ---------- */
-function StepPill({ active, done, n, label }: { active: boolean; done: boolean; n: number; label: string }) {
+function StepPill({
+  active,
+  done,
+  n,
+  label,
+}: {
+  active: boolean;
+  done: boolean;
+  n: number;
+  label: string;
+}) {
   return (
     <div className="flex items-center gap-1.5">
       <span
         className={[
           "flex size-5 items-center justify-center rounded-full text-[10px] font-bold transition-all",
-          active ? "bg-gold text-plum" : done ? "bg-gold/40 text-gold" : "bg-muted text-muted-foreground",
+          active
+            ? "bg-gold text-plum"
+            : done
+              ? "bg-gold/40 text-gold"
+              : "bg-muted text-muted-foreground",
         ].join(" ")}
       >
         {done ? "✓" : n}
       </span>
-      <span className={["text-xs font-medium transition-colors", active ? "text-foreground" : "text-muted-foreground"].join(" ")}>
+      <span
+        className={[
+          "text-xs font-medium transition-colors",
+          active ? "text-foreground" : "text-muted-foreground",
+        ].join(" ")}
+      >
         {label}
       </span>
     </div>
@@ -199,7 +228,17 @@ function StepPill({ active, done, n, label }: { active: boolean; done: boolean; 
 }
 
 /* ---------- Field ---------- */
-function Field({ label, icon, error, children }: { label: string; icon?: React.ReactNode; error?: string | undefined; children: React.ReactNode }) {
+function Field({
+  label,
+  icon,
+  error,
+  children,
+}: {
+  label: string;
+  icon?: React.ReactNode;
+  error?: string | undefined;
+  children: React.ReactNode;
+}) {
   return (
     <div className="space-y-1.5">
       <Label className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -256,16 +295,29 @@ function FormStep({
     <form id="reg-form" onSubmit={onNext} className="space-y-10" noValidate>
       <div className="text-center">
         <p className="chapter-label text-gold">Luminous Rangoli Competition</p>
-        <h1 className="mt-3 font-brand text-4xl font-bold uppercase tracking-[0.06em] sm:text-5xl">Register</h1>
+        <h1 className="mt-3 font-brand text-4xl font-bold uppercase tracking-[0.06em] sm:text-5xl">
+          Register
+        </h1>
         <p className="mt-3 font-serif text-lg italic text-gold">{event.tagline}</p>
-        <p className="mt-2 text-sm text-muted-foreground">All fields are required · Team of 4 (leader + 3 members) · Entry ₹100</p>
+        <p className="mt-2 text-sm text-muted-foreground">
+          All fields are required · Team of 4 (leader + 3 members) · Entry ₹100
+        </p>
       </div>
 
       {/* Team */}
       <div>
         <SectionHeading>Team</SectionHeading>
-        <Field label="Team Name" icon={<Users className="size-3" />} error={errors.team_name?.message}>
-          <LuminousInput {...register("team_name")} id="team_name" placeholder="Your team's creative name" autoComplete="off" />
+        <Field
+          label="Team Name"
+          icon={<Users className="size-3" />}
+          error={errors.team_name?.message}
+        >
+          <LuminousInput
+            {...register("team_name")}
+            id="team_name"
+            placeholder="Your team's creative name"
+            autoComplete="off"
+          />
         </Field>
       </div>
 
@@ -273,15 +325,59 @@ function FormStep({
       <div>
         <SectionHeading>Team Leader</SectionHeading>
         <div className="space-y-5">
-          <Field label="Full Name" icon={<User className="size-3" />} error={errors.team_leader?.message}>
-            <LuminousInput {...register("team_leader")} id="team_leader" placeholder="Leader's full name" autoComplete="name" />
-          </Field>
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Email ID" icon={<Mail className="size-3" />} error={errors.team_leader_email?.message}>
-              <LuminousInput {...register("team_leader_email")} id="team_leader_email" type="email" placeholder="leader@example.com" autoComplete="email" />
+            <Field
+              label="Full Name"
+              icon={<User className="size-3" />}
+              error={errors.team_leader?.message}
+            >
+              <LuminousInput
+                {...register("team_leader")}
+                id="team_leader"
+                placeholder="Leader's full name"
+                autoComplete="name"
+              />
             </Field>
-            <Field label="WhatsApp Number" icon={<Phone className="size-3" />} error={errors.team_leader_whatsapp?.message}>
-              <LuminousInput {...register("team_leader_whatsapp")} id="team_leader_whatsapp" type="tel" placeholder="10-digit number" maxLength={10} autoComplete="tel" />
+            <Field
+              label="Registration No."
+              icon={<IdCard className="size-3" />}
+              error={errors.team_leader_reg_no?.message}
+            >
+              <LuminousInput
+                {...register("team_leader_reg_no")}
+                id="team_leader_reg_no"
+                placeholder="e.g. 22U10xxx or Reg No."
+                autoComplete="off"
+              />
+            </Field>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field
+              label="Email ID"
+              icon={<Mail className="size-3" />}
+              error={errors.team_leader_email?.message}
+            >
+              <LuminousInput
+                {...register("team_leader_email")}
+                id="team_leader_email"
+                type="email"
+                placeholder="leader@example.com"
+                autoComplete="email"
+              />
+            </Field>
+            <Field
+              label="WhatsApp Number"
+              icon={<Phone className="size-3" />}
+              error={errors.team_leader_whatsapp?.message}
+            >
+              <LuminousInput
+                {...register("team_leader_whatsapp")}
+                id="team_leader_whatsapp"
+                type="tel"
+                placeholder="10-digit number"
+                maxLength={10}
+                autoComplete="tel"
+              />
             </Field>
           </div>
         </div>
@@ -295,16 +391,28 @@ function FormStep({
             <div key={n} className="rounded-lg border border-border/50 p-5 space-y-4">
               <p className="chapter-label !text-[0.65rem] text-muted-foreground">Member {n}</p>
               <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="Full Name" icon={<User className="size-3" />} error={(errors as Record<string, { message?: string }>)[`member${n}_name`]?.message}>
+                <Field
+                  label="Full Name"
+                  icon={<User className="size-3" />}
+                  error={
+                    (errors as Record<string, { message?: string }>)[`member${n}_name`]?.message
+                  }
+                >
                   <LuminousInput
-                    {...register((`member${n}_name`) as keyof RegistrationData)}
+                    {...register(`member${n}_name` as keyof RegistrationData)}
                     id={`member${n}_name`}
                     placeholder={`Member ${n}'s full name`}
                   />
                 </Field>
-                <Field label="Phone Number" icon={<Phone className="size-3" />} error={(errors as Record<string, { message?: string }>)[`member${n}_number`]?.message}>
+                <Field
+                  label="Phone Number"
+                  icon={<Phone className="size-3" />}
+                  error={
+                    (errors as Record<string, { message?: string }>)[`member${n}_number`]?.message
+                  }
+                >
                   <LuminousInput
-                    {...register((`member${n}_number`) as keyof RegistrationData)}
+                    {...register(`member${n}_number` as keyof RegistrationData)}
                     id={`member${n}_number`}
                     type="tel"
                     placeholder="10-digit number"
@@ -347,37 +455,116 @@ function PaymentStep({
   setValue: ReturnType<typeof useForm<RegistrationData>>["setValue"];
   errors: ReturnType<typeof useForm<RegistrationData>>["formState"]["errors"];
 }) {
+  const [copied, setCopied] = useState(false);
+  const upiId = "edcnitd@upi";
+  const upiPaymentUrl =
+    "upi://pay?pa=edcnitd@upi&pn=EDC%20NIT%20Durgapur&am=100&cu=INR&tn=Luminous%2010.0%20Registration";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(upiId);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownloadQr = async (e: React.MouseEvent) => {
+    try {
+      const res = await fetch("/images/upi-qr.png");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "upi.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch {
+      // Direct navigation fallback
+      window.open("/images/upi-qr.png", "_blank");
+    }
+  };
+
   return (
     <form id="payment-form" onSubmit={onSubmit} className="space-y-10" noValidate>
       <div className="text-center">
         <p className="chapter-label text-gold">Step 2 of 2</p>
-        <h1 className="mt-3 font-brand text-4xl font-bold uppercase tracking-[0.06em] sm:text-5xl">Payment</h1>
+        <h1 className="mt-3 font-brand text-4xl font-bold uppercase tracking-[0.06em] sm:text-5xl">
+          Payment
+        </h1>
         <p className="mt-3 font-serif text-lg italic text-gold">One spark, one entry.</p>
       </div>
 
       <div className="rounded-xl border border-gold/30 bg-gold/5 p-6 space-y-5">
         <SectionHeading>Pay ₹100 via UPI</SectionHeading>
         <div className="flex flex-col items-center gap-4">
-          {/* Placeholder QR — replace src with real QR */}
-          <div className="flex size-40 items-center justify-center rounded-xl border-2 border-dashed border-gold/40 bg-gold/5 text-center">
-            <div className="space-y-1">
-              <CreditCard className="mx-auto size-8 text-gold/50" />
-              <p className="text-[10px] text-muted-foreground leading-tight">QR code will<br />appear here</p>
-            </div>
+          {/* QR Code image */}
+          <div className="relative flex size-44 items-center justify-center rounded-xl border border-gold/40 bg-white p-2.5 shadow-lg">
+            <img
+              src="/images/upi-qr.png"
+              alt="EDC NIT Durgapur UPI QR Code"
+              className="size-full object-contain"
+            />
           </div>
-          <div className="text-center space-y-1">
+
+          {/* Download QR Button & Mobile UPI app trigger */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            <a
+              href="/images/upi-qr.png"
+              download="upi.png"
+              onClick={handleDownloadQr}
+              id="download-upi-btn"
+              className="inline-flex items-center gap-2 rounded-md border border-gold/50 bg-gold/15 px-4 py-2 text-xs font-semibold text-gold transition-all hover:bg-gold/25 hover:text-gold active:scale-95"
+            >
+              <Download className="size-3.5" /> Download QR Code (upi.png)
+            </a>
+            <a
+              href={upiPaymentUrl}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border/80 bg-slate/60 px-3.5 py-2 text-xs font-medium text-foreground transition-all hover:bg-slate sm:hidden"
+            >
+              Pay via UPI App <ArrowUpRight className="size-3" />
+            </a>
+          </div>
+
+          <div className="text-center space-y-1.5">
             <p className="text-xs uppercase tracking-widest text-muted-foreground">UPI ID</p>
-            {/* Replace with real UPI ID */}
-            <p className="font-mono text-lg font-bold text-gold select-all">edcnitd@upi</p>
-            <p className="text-xs text-muted-foreground">Pay exactly <strong className="text-foreground">₹100</strong></p>
+            <div className="flex items-center justify-center gap-2">
+              <span className="font-mono text-lg font-bold text-gold select-all">{upiId}</span>
+              <button
+                type="button"
+                onClick={handleCopy}
+                title="Copy UPI ID"
+                className="inline-flex size-7 items-center justify-center rounded border border-gold/30 bg-gold/10 text-gold transition-colors hover:bg-gold/20"
+              >
+                {copied ? (
+                  <Check className="size-3.5 text-emerald-400" />
+                ) : (
+                  <Copy className="size-3.5" />
+                )}
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Pay exactly <strong className="text-foreground">₹100</strong>
+            </p>
           </div>
         </div>
         <div className="rounded-lg bg-slate/60 border border-border/40 px-4 py-3 space-y-1">
-          <p className="font-semibold text-foreground text-xs uppercase tracking-wider">Instructions</p>
+          <p className="font-semibold text-foreground text-xs uppercase tracking-wider">
+            Instructions
+          </p>
           <ul className="list-disc list-inside space-y-0.5 text-xs leading-relaxed text-muted-foreground">
-            <li>Open any UPI app (GPay, PhonePe, Paytm, BHIM)</li>
-            <li>Scan the QR or enter the UPI ID above</li>
-            <li>Pay exactly <strong className="text-foreground">₹100</strong></li>
+            <li>Download the QR code image above or scan it directly from another device</li>
+            <li>
+              In your UPI app (GPay, PhonePe, Paytm, BHIM), choose{" "}
+              <strong className="text-foreground">Scan QR</strong> →{" "}
+              <strong className="text-foreground">Upload from gallery</strong> and select{" "}
+              <span className="font-mono text-gold">upi.png</span>
+            </li>
+            <li>
+              Or manually pay using the UPI ID <span className="font-mono text-gold">{upiId}</span>
+            </li>
+            <li>
+              Pay exactly <strong className="text-foreground">₹100</strong>
+            </li>
             <li>Take a screenshot of the successful payment confirmation</li>
             <li>Upload the screenshot below and submit your registration</li>
           </ul>
@@ -386,7 +573,11 @@ function PaymentStep({
 
       <div>
         <SectionHeading>Payment Confirmation</SectionHeading>
-        <Field label="Payment Screenshot" icon={<CreditCard className="size-3" />} error={errors.payment_screenshot?.message}>
+        <Field
+          label="Payment Screenshot"
+          icon={<CreditCard className="size-3" />}
+          error={errors.payment_screenshot?.message}
+        >
           <input type="hidden" {...register("payment_screenshot")} />
           <input
             id="payment_screenshot"
@@ -408,7 +599,9 @@ function PaymentStep({
             }}
           />
         </Field>
-        <p className="mt-2 text-xs text-muted-foreground">Upload a clear screenshot of the successful payment. PNG, JPG, or WebP up to 5 MB.</p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Upload a clear screenshot of the successful payment. PNG, JPG, or WebP up to 5 MB.
+        </p>
       </div>
 
       {serverError && (
@@ -438,9 +631,13 @@ function PaymentStep({
           className="h-12 flex-[2] bg-gold text-plum font-semibold text-sm uppercase tracking-widest hover:bg-gold/90 transition-all hover:shadow-[0_0_32px_oklch(0.82_0.13_75/0.5)] disabled:opacity-60"
         >
           {isSubmitting ? (
-            <><Loader2 className="size-4 animate-spin" /> Submitting…</>
+            <>
+              <Loader2 className="size-4 animate-spin" /> Submitting…
+            </>
           ) : (
-            <>Submit Registration <ArrowUpRight className="size-4" /></>
+            <>
+              Submit Registration <ArrowUpRight className="size-4" />
+            </>
           )}
         </Button>
       </div>
@@ -466,11 +663,14 @@ function SuccessState({ divRef }: { divRef: React.RefObject<HTMLDivElement | nul
       <Diya className="w-16 opacity-80" />
 
       <div className="space-y-3 max-w-sm">
-        <h1 className="font-brand text-3xl font-bold uppercase tracking-[0.06em] sm:text-4xl">You're Registered!</h1>
+        <h1 className="font-brand text-3xl font-bold uppercase tracking-[0.06em] sm:text-4xl">
+          You're Registered!
+        </h1>
         <p className="font-serif text-xl italic text-gold">Welcome to LUMINOUS 10.0</p>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Your team's registration for the Luminous Rangoli Competition has been received. We'll reach out via{" "}
-          <strong className="text-foreground">your team leader's WhatsApp</strong> with confirmation and further details.
+          Your team's registration for the Luminous Rangoli Competition has been received. We'll
+          reach out via <strong className="text-foreground">your team leader's WhatsApp</strong>{" "}
+          with confirmation and further details.
         </p>
       </div>
 
@@ -490,13 +690,22 @@ function SuccessState({ divRef }: { divRef: React.RefObject<HTMLDivElement | nul
 
       <div className="flex flex-col items-center gap-3">
         <Link to="/">
-          <Button variant="outline" id="success-home-btn" className="border-gold/40 text-gold hover:bg-gold/10 hover:text-gold">
+          <Button
+            variant="outline"
+            id="success-home-btn"
+            className="border-gold/40 text-gold hover:bg-gold/10 hover:text-gold"
+          >
             <ArrowLeft className="size-3.5" /> Back to LUMINOUS
           </Button>
         </Link>
         <p className="text-xs text-muted-foreground">
           Follow{" "}
-          <a href="https://www.instagram.com/edc_nitd/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground transition-colors">
+          <a
+            href="https://www.instagram.com/edc_nitd/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-foreground transition-colors"
+          >
             @edc_nitd
           </a>{" "}
           for updates

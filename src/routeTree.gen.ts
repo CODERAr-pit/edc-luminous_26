@@ -10,17 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-<<<<<<< HEAD
 import { Route as RegisterRouteImport } from './routes/register'
-=======
->>>>>>> origin/main
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-<<<<<<< HEAD
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -34,19 +30,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/register': typeof RegisterRoute
-=======
-
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-}
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
->>>>>>> origin/main
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-<<<<<<< HEAD
   '/register': typeof RegisterRoute
 }
 export interface FileRouteTypes {
@@ -55,23 +42,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/register'
   id: '__root__' | '/' | '/register'
-=======
-}
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
->>>>>>> origin/main
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-<<<<<<< HEAD
   RegisterRoute: typeof RegisterRoute
-=======
->>>>>>> origin/main
 }
 
 declare module '@tanstack/react-router' {
@@ -83,7 +58,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-<<<<<<< HEAD
     '/register': {
       id: '/register'
       path: '/register'
@@ -91,17 +65,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-=======
->>>>>>> origin/main
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-<<<<<<< HEAD
   RegisterRoute: RegisterRoute,
-=======
->>>>>>> origin/main
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

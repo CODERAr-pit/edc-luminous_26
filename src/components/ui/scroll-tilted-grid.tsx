@@ -5,13 +5,7 @@
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "framer-motion";
 import ReactLenis from "lenis/react";
-import {
-  type CSSProperties,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 
 export interface ScrollTiltedGridImage {
   src: string;
@@ -126,11 +120,7 @@ function GalleryTile({
   };
 
   return (
-    <figure
-      ref={tileRef}
-      className={cn("m-0 min-w-0", side > 0 && "md:mt-6")}
-      style={variables}
-    >
+    <figure ref={tileRef} className={cn("m-0 min-w-0", side > 0 && "md:mt-6")} style={variables}>
       <div
         className={cn(
           "relative w-full overflow-hidden border border-border bg-background",
@@ -170,9 +160,7 @@ export function ScrollTiltedGrid({
 }: ScrollTiltedGridProps) {
   const reduceMotion = useReducedMotion() ?? false;
   const cycleLimit = Math.max(1, maxCycles);
-  const [cycleCount, setCycleCount] = useState(() =>
-    clamp(initialCycles, 1, cycleLimit),
-  );
+  const [cycleCount, setCycleCount] = useState(() => clamp(initialCycles, 1, cycleLimit));
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -228,10 +216,7 @@ export function ScrollTiltedGrid({
   );
 
   return smoothScroll && !reduceMotion ? (
-    <ReactLenis
-      root
-      options={{ autoRaf: true, lerp: 0.075, wheelMultiplier: 0.85 }}
-    >
+    <ReactLenis root options={{ autoRaf: true, lerp: 0.075, wheelMultiplier: 0.85 }}>
       {gallery}
     </ReactLenis>
   ) : (

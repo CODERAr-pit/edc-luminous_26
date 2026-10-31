@@ -9,16 +9,34 @@ export function HeroSection() {
   useGSAP(
     () => {
       if (prefersReduced()) return;
-      gsap.fromTo(".hero-img", { scale: 1.12, opacity: 0 }, { scale: 1, opacity: 1, duration: 2.4, ease: "power2.out" });
-      gsap.fromTo(".hero-in", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, stagger: 0.15, ease: "power3.out", delay: 0.4 });
-      gsap.to(".hero-img", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: true } });
+      gsap.fromTo(
+        ".hero-img",
+        { scale: 1.12, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 2.4, ease: "power2.out" },
+      );
+      gsap.fromTo(
+        ".hero-in",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.1, stagger: 0.15, ease: "power3.out", delay: 0.4 },
+      );
+      gsap.to(".hero-img", {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: true },
+      });
     },
     { scope: ref },
   );
 
   return (
     <section id="home" ref={ref} className="relative flex min-h-screen items-end overflow-hidden">
-      <img src={photos.crowdEdc.src} alt={photos.crowdEdc.alt} className="hero-img absolute inset-0 h-full w-full object-cover" loading="eager" fetchPriority="high" />
+      <img
+        src={photos.crowdEdc.src}
+        alt={photos.crowdEdc.alt}
+        className="hero-img absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+        fetchPriority="high"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-plum via-plum/60 to-plum/30" />
       <div className="absolute inset-0 bg-gradient-to-r from-plum/90 via-plum/30 to-transparent" />
 
@@ -38,7 +56,9 @@ export function HeroSection() {
           {event.date && (
             <div>
               <p className="chapter-label !text-[0.6rem] text-ivory/50">Date</p>
-              <p className="mt-1 font-sans text-lg font-semibold tabular-nums text-ivory">{event.date}</p>
+              <p className="mt-1 font-sans text-lg font-semibold tabular-nums text-ivory">
+                {event.date}
+              </p>
             </div>
           )}
           <div>

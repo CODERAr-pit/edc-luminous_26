@@ -1,10 +1,11 @@
 -- Run this in your Supabase SQL editor (Database → SQL Editor → New Query)
--- to create the registrations table for LUMINOUS 10.0
+-- to create or update the registrations table for LUMINOUS 10.0
 
 create table if not exists public.luminous_registrations (
   id              uuid primary key default gen_random_uuid(),
   team_name       text not null,
   team_leader     text not null,
+  team_leader_reg_no text not null default '',
   team_leader_email text not null,
   team_leader_whatsapp text not null,
   member1_name    text not null,
@@ -16,6 +17,10 @@ create table if not exists public.luminous_registrations (
   payment_screenshot_path text not null,
   submitted_at    timestamptz not null default now()
 );
+
+-- Ensure the column exists if the table was already created previously
+alter table public.luminous_registrations
+  add column if not exists team_leader_reg_no text not null default '';
 
 -- Enable Row Level Security
 alter table public.luminous_registrations enable row level security;
