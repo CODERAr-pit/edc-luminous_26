@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Sparkles } from "lucide-react";
 import { event, lightLogo } from "@/data/luminous";
 import { RegisterButton } from "./RegisterButton";
 import { Diya } from "./Diya";
@@ -105,17 +106,19 @@ export function RevealSection() {
       {/* Floating Festive Toast (Easter Egg) */}
       {showCelebrationBadge && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in slide-in-from-top-4 duration-500 ease-out">
-          <div className="relative flex items-center gap-2.5 rounded-full border border-gold/40 bg-plum/85 px-4 py-2 shadow-[0_0_30px_rgba(230,160,68,0.35),0_8px_20px_rgba(0,0,0,0.5)] backdrop-blur-xl">
-            <span className="text-base select-none">🪔</span>
-            <div className="flex flex-col text-left">
-              <span className="font-brand text-[0.74rem] font-bold tracking-[0.14em] uppercase text-ivory leading-tight">
-                Happy Diwali from Team EDC
+          <div className="relative flex items-center gap-2.5 sm:gap-3 rounded-full border border-gold/45 bg-gradient-to-r from-plum/95 via-[#231217]/95 to-plum/95 px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_0_25px_rgba(230,160,68,0.35),0_10px_30px_rgba(0,0,0,0.65)] backdrop-blur-2xl ring-1 ring-gold/25 ring-inset">
+            <div className="flex items-center shrink-0 -my-1">
+              <Diya className="w-5 sm:w-6 shrink-0" />
+            </div>
+            <div className="flex items-baseline gap-2 whitespace-nowrap">
+              <span className="font-brand text-[0.8rem] sm:text-sm font-bold tracking-[0.14em] uppercase text-ivory text-glow">
+                Happy Diwali!
               </span>
-              <span className="font-serif text-[0.7rem] italic text-gold leading-tight">
-                LUMINOUS 10.0 · NIT Durgapur
+              <span className="font-serif text-[0.78rem] sm:text-[0.88rem] italic text-gold">
+                from Team EDC
               </span>
             </div>
-            <span className="text-xs text-gold select-none">✨</span>
+            <Sparkles className="w-3.5 h-3.5 text-gold shrink-0 animate-pulse" />
           </div>
         </div>
       )}
