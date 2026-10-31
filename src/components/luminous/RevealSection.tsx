@@ -260,18 +260,18 @@ export function RevealSection() {
 
           {/* Right: Event Details & Brand Lockup */}
           <div className="relative z-10 flex flex-col items-center text-center lg:col-span-7 lg:items-start lg:text-left">
-            {/* Elegant brand lockup: EDC logo side-by-side with Diya flame */}
-            <div className="flex items-center justify-center gap-5 lg:justify-start">
+            {/* Elegant brand lockup: EDC logo side-by-side with traditional Diya flame */}
+            <div className="flex items-center justify-center gap-5 sm:gap-6 lg:justify-start">
               <img
                 src={lightLogo.src}
                 alt={lightLogo.alt}
                 width={1356}
                 height={496}
-                className="h-9 w-auto max-w-[170px] object-contain"
+                className="h-10 w-auto max-w-[170px] object-contain sm:h-11"
                 loading="lazy"
               />
-              <span className="h-6 w-px bg-gold/40" aria-hidden="true" />
-              <Diya className="w-14 shrink-0 drop-shadow-[0_0_18px_rgba(230,160,68,0.45)]" />
+              <span className="h-8 w-px bg-gold/40" aria-hidden="true" />
+              <Diya className="w-20 sm:w-24 shrink-0 drop-shadow-[0_0_24px_rgba(230,160,68,0.5)]" />
             </div>
 
             <p className="chapter-label mt-8 text-gold">Event details</p>
