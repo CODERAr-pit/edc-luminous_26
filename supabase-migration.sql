@@ -22,6 +22,13 @@ create table if not exists public.luminous_registrations (
 alter table public.luminous_registrations
   add column if not exists team_leader_reg_no text not null default '';
 
+-- Allow optional team members 3 and 4 to be null/empty
+alter table public.luminous_registrations
+  alter column member2_name drop not null,
+  alter column member2_number drop not null,
+  alter column member3_name drop not null,
+  alter column member3_number drop not null;
+
 -- Enable Row Level Security
 alter table public.luminous_registrations enable row level security;
 

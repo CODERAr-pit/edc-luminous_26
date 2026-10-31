@@ -300,7 +300,7 @@ function FormStep({
         </h1>
         <p className="mt-3 font-serif text-lg italic text-gold">{event.tagline}</p>
         <p className="mt-2 text-sm text-muted-foreground">
-          All fields are required · Team of 4 (leader + 3 members) · Entry ₹100
+          Team of 2–4 members · Member 3 &amp; 4 are optional · Entry ₹100
         </p>
       </div>
 
@@ -387,35 +387,63 @@ function FormStep({
       <div>
         <SectionHeading>Team Members</SectionHeading>
         <div className="space-y-6">
-          {([1, 2, 3] as const).map((n) => (
-            <div key={n} className="rounded-lg border border-border/50 p-5 space-y-4">
-              <p className="chapter-label !text-[0.65rem] text-muted-foreground">Member {n}</p>
+          {[
+            {
+              id: "member1",
+              nameKey: "member1_name" as const,
+              numberKey: "member1_number" as const,
+              label: "Member 2",
+              optional: false,
+              namePlaceholder: "Member 2's full name",
+            },
+            {
+              id: "member2",
+              nameKey: "member2_name" as const,
+              numberKey: "member2_number" as const,
+              label: "Member 3",
+              optional: true,
+              namePlaceholder: "Member 3's full name (optional)",
+            },
+            {
+              id: "member3",
+              nameKey: "member3_name" as const,
+              numberKey: "member3_number" as const,
+              label: "Member 4",
+              optional: true,
+              namePlaceholder: "Member 4's full name (optional)",
+            },
+          ].map((m) => (
+            <div key={m.id} className="rounded-lg border border-border/50 p-5 space-y-4">
+              <div className="flex items-center justify-between">
+                <p className="chapter-label !text-[0.65rem] text-muted-foreground">
+                  {m.label} {m.optional && <span className="text-gold font-normal">(Optional)</span>}
+                </p>
+                {m.optional && (
+                  <span className="text-[0.68rem] text-muted-foreground/70">Optional</span>
+                )}
+              </div>
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field
-                  label="Full Name"
+                  label={m.optional ? "Full Name (Optional)" : "Full Name"}
                   icon={<User className="size-3" />}
-                  error={
-                    (errors as Record<string, { message?: string }>)[`member${n}_name`]?.message
-                  }
+                  error={errors[m.nameKey]?.message}
                 >
                   <LuminousInput
-                    {...register(`member${n}_name` as keyof RegistrationData)}
-                    id={`member${n}_name`}
-                    placeholder={`Member ${n}'s full name`}
+                    {...register(m.nameKey)}
+                    id={m.nameKey}
+                    placeholder={m.namePlaceholder}
                   />
                 </Field>
                 <Field
-                  label="Phone Number"
+                  label={m.optional ? "Phone Number (Optional)" : "Phone Number"}
                   icon={<Phone className="size-3" />}
-                  error={
-                    (errors as Record<string, { message?: string }>)[`member${n}_number`]?.message
-                  }
+                  error={errors[m.numberKey]?.message}
                 >
                   <LuminousInput
-                    {...register(`member${n}_number` as keyof RegistrationData)}
-                    id={`member${n}_number`}
+                    {...register(m.numberKey)}
+                    id={m.numberKey}
                     type="tel"
-                    placeholder="10-digit number"
+                    placeholder={m.optional ? "10-digit number (optional)" : "10-digit number"}
                     maxLength={10}
                   />
                 </Field>

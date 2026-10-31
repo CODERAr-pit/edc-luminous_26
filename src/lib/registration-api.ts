@@ -18,36 +18,88 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-export const registrationSchema = z.object({
-  team_name: z.string().trim().min(1, "Team name is required").max(100),
-  team_leader: z.string().trim().min(1, "Team leader name is required").max(100),
-  team_leader_reg_no: z.string().trim().min(1, "Registration number is required").max(50),
-  team_leader_email: z.string().trim().email("Invalid email address"),
-  team_leader_whatsapp: z
-    .string()
-    .length(10, "WhatsApp number must be 10 digits")
-    .regex(/^\d+$/, "Must contain only digits"),
-  member1_name: z.string().min(1, "Member 1 name is required").max(100),
-  member1_number: z
-    .string()
-    .length(10, "Member 1 number must be 10 digits")
-    .regex(/^\d+$/, "Must contain only digits"),
-  member2_name: z.string().min(1, "Member 2 name is required").max(100),
-  member2_number: z
-    .string()
-    .length(10, "Member 2 number must be 10 digits")
-    .regex(/^\d+$/, "Must contain only digits"),
-  member3_name: z.string().min(1, "Member 3 name is required").max(100),
-  member3_number: z
-    .string()
-    .length(10, "Member 3 number must be 10 digits")
-    .regex(/^\d+$/, "Must contain only digits"),
-  payment_screenshot: z
-    .string()
-    .min(1, "Payment screenshot is required")
-    .regex(/^data:image\/(jpeg|png|webp);base64,/, "Please upload a valid image")
-    .max(7_000_000, "Screenshot must be 5 MB or smaller"),
-});
+export const registrationSchema = z
+  .object({
+    team_name: z.string().trim().min(1, "Team name is required").max(100),
+    team_leader: z.string().trim().min(1, "Team leader name is required").max(100),
+    team_leader_reg_no: z.string().trim().min(1, "Registration number is required").max(50),
+    team_leader_email: z.string().trim().email("Invalid email address"),
+    team_leader_whatsapp: z
+      .string()
+      .trim()
+      .length(10, "WhatsApp number must be 10 digits")
+      .regex(/^\d+$/, "Must contain only digits"),
+    member1_name: z.string().trim().min(1, "Member 2 name is required").max(100),
+    member1_number: z
+      .string()
+      .trim()
+      .length(10, "Member 2 number must be 10 digits")
+      .regex(/^\d+$/, "Must contain only digits"),
+    member2_name: z.string().trim().max(100).optional(),
+    member2_number: z.string().trim().optional(),
+    member3_name: z.string().trim().max(100).optional(),
+    member3_number: z.string().trim().optional(),
+    payment_screenshot: z
+      .string()
+      .min(1, "Payment screenshot is required")
+      .regex(/^data:image\/(jpeg|png|webp);base64,/, "Please upload a valid image")
+      .max(7_000_000, "Screenshot must be 5 MB or smaller"),
+  })
+  .superRefine((data, ctx) => {
+    // Member 3 validation (optional unless partially filled)
+    const hasM2Name = Boolean(data.member2_name && data.member2_name.trim().length > 0);
+    const hasM2Num = Boolean(data.member2_number && data.member2_number.trim().length > 0);
+    if (hasM2Name && !hasM2Num) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["member2_number"],
+        message: "Phone number is required for Member 3",
+      });
+    } else if (hasM2Num && !hasM2Name) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["member2_name"],
+        message: "Full name is required for Member 3",
+      });
+    }
+    if (hasM2Num) {
+      const trimmed = data.member2_number!.trim();
+      if (trimmed.length !== 10 || !/^\d+$/.test(trimmed)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["member2_number"],
+          message: "Member 3 number must be 10 digits",
+        });
+      }
+    }
+
+    // Member 4 validation (optional unless partially filled)
+    const hasM3Name = Boolean(data.member3_name && data.member3_name.trim().length > 0);
+    const hasM3Num = Boolean(data.member3_number && data.member3_number.trim().length > 0);
+    if (hasM3Name && !hasM3Num) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["member3_number"],
+        message: "Phone number is required for Member 4",
+      });
+    } else if (hasM3Num && !hasM3Name) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["member3_name"],
+        message: "Full name is required for Member 4",
+      });
+    }
+    if (hasM3Num) {
+      const trimmed = data.member3_number!.trim();
+      if (trimmed.length !== 10 || !/^\d+$/.test(trimmed)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ["member3_number"],
+          message: "Member 4 number must be 10 digits",
+        });
+      }
+    }
+  });
 
 export type RegistrationData = z.infer<typeof registrationSchema>;
 
@@ -72,12 +124,12 @@ async function syncRegistrationToGoogleSheets(data: RegistrationData, screenshot
         team_leader_reg_no: data.team_leader_reg_no,
         team_leader_email: data.team_leader_email,
         team_leader_whatsapp: data.team_leader_whatsapp,
-        member1_name: data.member1_name,
-        member1_number: data.member1_number,
-        member2_name: data.member2_name,
-        member2_number: data.member2_number,
-        member3_name: data.member3_name,
-        member3_number: data.member3_number,
+        member1_name: data.member1_name.trim(),
+        member1_number: data.member1_number.trim(),
+        member2_name: data.member2_name?.trim() || "",
+        member2_number: data.member2_number?.trim() || "",
+        member3_name: data.member3_name?.trim() || "",
+        member3_number: data.member3_number?.trim() || "",
         payment_screenshot_path: screenshotPath,
         submitted_at: new Date().toISOString(),
       },
@@ -129,12 +181,12 @@ export const submitRegistration = createServerFn({ method: "POST" })
         team_leader_reg_no: data.team_leader_reg_no,
         team_leader_email: data.team_leader_email,
         team_leader_whatsapp: data.team_leader_whatsapp,
-        member1_name: data.member1_name,
-        member1_number: data.member1_number,
-        member2_name: data.member2_name,
-        member2_number: data.member2_number,
-        member3_name: data.member3_name,
-        member3_number: data.member3_number,
+        member1_name: data.member1_name.trim(),
+        member1_number: data.member1_number.trim(),
+        member2_name: data.member2_name?.trim() || "",
+        member2_number: data.member2_number?.trim() || "",
+        member3_name: data.member3_name?.trim() || "",
+        member3_number: data.member3_number?.trim() || "",
         payment_screenshot_path: screenshotPath,
         submitted_at: new Date().toISOString(),
       },
