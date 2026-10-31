@@ -102,34 +102,47 @@ export function RevealSection() {
         onDone={() => setFireworksActive(false)}
       />
 
-      {/* Floating Festive Toast */}
+      {/* Floating Festive Toast (Easter Egg) */}
       {showCelebrationBadge && (
-        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in zoom-in-95 duration-500">
-          <div className="flex items-center gap-3 rounded-full border border-gold/40 bg-plum/90 px-6 py-2.5 shadow-[0_0_35px_rgba(230,160,68,0.4)] backdrop-blur-md">
-            <span className="text-xl">🪔</span>
-            <div className="flex flex-col items-center text-center">
-              <span className="font-brand text-xs font-bold uppercase tracking-[0.22em] text-gold">
-                Shubh Diwali
-              </span>
-              <span className="text-[0.68rem] tracking-wider text-ivory/80 font-sans">
-                LUMINOUS 10.0 · EDC NIT Durgapur
-              </span>
+        <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[130] pointer-events-none w-[92vw] max-w-md animate-in fade-in slide-in-from-top-6 duration-700 ease-out">
+          <div className="relative overflow-hidden rounded-2xl border border-gold/35 bg-plum/85 p-5 text-center shadow-[0_0_50px_rgba(230,160,68,0.35),0_16px_40px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
+            {/* Subtle background golden flare */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-10 left-1/2 h-28 w-44 -translate-x-1/2 rounded-full bg-gold/20 blur-2xl"
+            />
+
+            <div className="relative flex flex-col items-center">
+              <span className="text-2xl drop-shadow-[0_0_14px_rgba(230,160,68,0.85)]">🪔</span>
+
+              <h4 className="mt-2 font-brand text-sm sm:text-base font-bold tracking-[0.16em] uppercase text-ivory">
+                Happy Diwali from Team EDC
+              </h4>
+
+              <p className="mt-1 font-serif text-sm italic text-gold/90">
+                May your night shine as bright as a thousand diyas ✨
+              </p>
+
+              <div className="mt-3 flex items-center justify-center gap-2.5">
+                <span className="h-px w-6 bg-gold/30" />
+                <span className="font-sans text-[0.62rem] font-medium tracking-[0.22em] uppercase text-ivory/60">
+                  LUMINOUS 10.0 · NIT Durgapur
+                </span>
+                <span className="h-px w-6 bg-gold/30" />
+              </div>
             </div>
-            <span className="text-xl">✨</span>
           </div>
         </div>
       )}
 
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left: Rangoli artwork in responsive square with interactive fireworks trigger */}
-          <div className="flex flex-col items-center justify-center lg:col-span-5">
+          {/* Left: Rangoli artwork in responsive square with interactive fireworks easter egg */}
+          <div className="flex items-center justify-center lg:col-span-5">
             <div
               ref={rangoliRef}
               role="button"
               tabIndex={0}
-              aria-label="Double-click to ignite Diwali fireworks"
-              title="Double-click the rangoli for Diwali fireworks!"
               onClick={handleRangoliClick}
               onDoubleClick={handleRangoliDoubleClick}
               onKeyDown={(e) => {
@@ -138,7 +151,7 @@ export function RevealSection() {
                   triggerFireworks();
                 }
               }}
-              className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-all duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.02] active:scale-[0.98] ${
+              className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-all duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.01] active:scale-[0.99] ${
                 isRangoliPulsing
                   ? "scale-105 filter drop-shadow-[0_0_35px_rgba(230,160,68,0.7)]"
                   : ""
@@ -258,21 +271,6 @@ export function RevealSection() {
                 })}
               </svg>
             </div>
-
-            {/* Visual hint / celebration status pill */}
-            <p className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-ivory/50 px-3.5 py-1 text-xs font-medium text-foreground/80 shadow-xs backdrop-blur-xs select-none transition-all duration-300 hover:border-gold/50 hover:text-gold">
-              {showCelebrationBadge ? (
-                <>
-                  <span className="text-sm">🎆</span>
-                  <span className="font-semibold text-gold">Diwali Fireworks Ignited!</span>
-                </>
-              ) : (
-                <>
-                  <span className="text-gold">✨</span>
-                  <span>Double-click rangoli for fireworks</span>
-                </>
-              )}
-            </p>
           </div>
 
           {/* Right: Event Details & Brand Lockup */}
