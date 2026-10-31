@@ -456,9 +456,10 @@ function PaymentStep({
   errors: ReturnType<typeof useForm<RegistrationData>>["formState"]["errors"];
 }) {
   const [copied, setCopied] = useState(false);
-  const upiId = "edcnitd@upi";
+  const upiId = "8637053650-2@ybl";
+  const upiName = "Debraj Mukherjee";
   const upiPaymentUrl =
-    "upi://pay?pa=edcnitd@upi&pn=EDC%20NIT%20Durgapur&am=100&cu=INR&tn=Luminous%2010.0%20Registration";
+    "upi://pay?pa=8637053650-2@ybl&pn=Debraj%20%20Mukherjee&mc=0000&mode=02&purpose=00";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(upiId);
@@ -501,7 +502,7 @@ function PaymentStep({
           <div className="relative flex size-44 items-center justify-center rounded-xl border border-gold/40 bg-white p-2.5 shadow-lg">
             <img
               src="/images/upi-qr.png"
-              alt="EDC NIT Durgapur UPI QR Code"
+              alt="PhonePe UPI QR Code - Debraj Mukherjee"
               className="size-full object-contain"
             />
           </div>
@@ -525,7 +526,7 @@ function PaymentStep({
             </a>
           </div>
 
-          <div className="text-center space-y-1.5">
+          <div className="text-center space-y-1">
             <p className="text-xs uppercase tracking-widest text-muted-foreground">UPI ID</p>
             <div className="flex items-center justify-center gap-2">
               <span className="font-mono text-lg font-bold text-gold select-all">{upiId}</span>
@@ -543,7 +544,8 @@ function PaymentStep({
               </button>
             </div>
             <p className="text-xs text-muted-foreground">
-              Pay exactly <strong className="text-foreground">₹100</strong>
+              Name: <span className="font-medium text-foreground">{upiName}</span> · Pay exactly{" "}
+              <strong className="text-foreground">₹100</strong>
             </p>
           </div>
         </div>
@@ -560,7 +562,8 @@ function PaymentStep({
               <span className="font-mono text-gold">upi.png</span>
             </li>
             <li>
-              Or manually pay using the UPI ID <span className="font-mono text-gold">{upiId}</span>
+              Or manually pay using the UPI ID <span className="font-mono text-gold">{upiId}</span>{" "}
+              ({upiName})
             </li>
             <li>
               Pay exactly <strong className="text-foreground">₹100</strong>
