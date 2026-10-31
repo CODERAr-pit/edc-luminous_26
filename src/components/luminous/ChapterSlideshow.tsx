@@ -7,6 +7,8 @@ export interface SlideItem {
   media: Media;
   title: string;
   desc: string;
+  objectPosition?: string;
+  className?: string;
 }
 
 interface ChapterSlideshowProps {
@@ -68,7 +70,9 @@ export function ChapterSlideshow({ slides, interval = 4500, className }: Chapter
               idx === currentIndex
                 ? "opacity-100 scale-100 z-10"
                 : "opacity-0 scale-105 z-0 pointer-events-none",
+              slide.className,
             )}
+            style={slide.objectPosition ? { objectPosition: slide.objectPosition } : undefined}
             loading={idx === 0 ? "eager" : "lazy"}
           />
         ))}
@@ -166,7 +170,11 @@ export function ChapterSlideshow({ slides, interval = 4500, className }: Chapter
               <img
                 src={item.media.src}
                 alt={item.title}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                className={cn(
+                  "h-full w-full object-cover transition-transform duration-300 group-hover:scale-105",
+                  item.className,
+                )}
+                style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
               />
             </button>
           ))}

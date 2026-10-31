@@ -81,9 +81,10 @@ const RANGOLI_PHOTOS: SlideItem[] = [
     desc: "Student team presenting the collection of decorated diyas",
   },
   {
-    media: photos.introRangoliGroup,
-    title: "Artistry & Teamwork",
-    desc: "College groups gathering around their vibrant floor creations",
+    media: photos.lanternRelease,
+    title: "Sky Lantern Release",
+    desc: "Students releasing a glowing golden sky lantern into the night sky",
+    objectPosition: "center 35%",
   },
   {
     media: photos.introDiyaFormation,

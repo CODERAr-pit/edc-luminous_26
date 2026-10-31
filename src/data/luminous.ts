@@ -154,6 +154,13 @@ export const photos = {
     label: "Young Creators",
   } as Media,
 
+  lanternRelease: {
+    type: "image",
+    src: "/images/lantern-release.jpg",
+    alt: "Students releasing a glowing sky lantern into the night sky",
+    label: "Sky Lantern Release",
+  } as Media,
+
   // Moments from the night (unique night-time celebrations)
   nightLantern: {
     type: "image",
