@@ -106,7 +106,7 @@ export function RevealSection() {
       {/* Floating Festive Toast (Easter Egg) */}
       {showCelebrationBadge && (
         <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in slide-in-from-top-4 duration-500 ease-out will-change-transform">
-          <div className="relative flex items-center gap-2.5 sm:gap-3 rounded-full border border-gold/45 bg-gradient-to-r from-plum/95 via-[#231217]/95 to-plum/95 px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_0_20px_rgba(230,160,68,0.3),0_8px_20px_rgba(0,0,0,0.6)] backdrop-blur-md ring-1 ring-gold/25 ring-inset">
+          <div className="relative flex items-center gap-2.5 sm:gap-3 rounded-full border border-amber-300/40 bg-gradient-to-r from-plum/95 via-[#231217]/95 to-plum/95 px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_0_20px_rgba(255,224,130,0.25),0_8px_20px_rgba(0,0,0,0.6)] backdrop-blur-md ring-1 ring-amber-300/25 ring-inset">
             <div className="flex items-center shrink-0 -my-1">
               <Diya className="w-5 sm:w-6 shrink-0" />
             </div>
@@ -114,11 +114,11 @@ export function RevealSection() {
               <span className="font-brand text-[0.8rem] sm:text-sm font-bold tracking-[0.14em] uppercase text-ivory text-glow">
                 Happy Diwali!
               </span>
-              <span className="font-serif text-[0.78rem] sm:text-[0.88rem] italic text-gold">
+              <span className="font-serif text-[0.78rem] sm:text-[0.88rem] italic text-[#ffe082] drop-shadow-[0_0_8px_rgba(255,224,130,0.4)]">
                 from Team EDC
               </span>
             </div>
-            <Sparkles className="w-3.5 h-3.5 text-gold shrink-0 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-[#ffe082] shrink-0 animate-pulse" />
           </div>
         </div>
       )}
