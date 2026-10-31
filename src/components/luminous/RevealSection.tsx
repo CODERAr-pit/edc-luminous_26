@@ -271,16 +271,18 @@ export function RevealSection() {
                 loading="lazy"
               />
               <span className="h-6 w-px bg-gold/40" aria-hidden="true" />
-              <Diya className="w-12 shrink-0" />
+              <Diya className="w-14 shrink-0 drop-shadow-[0_0_18px_rgba(230,160,68,0.45)]" />
             </div>
 
             <p className="chapter-label mt-8 text-gold">Event details</p>
             <h2
-              className="rv-word mt-3 max-w-full font-brand text-3xl font-bold uppercase leading-none tracking-[0.06em] sm:text-5xl md:text-6xl lg:text-7xl"
+              className="rv-word mt-3 flex flex-wrap items-baseline gap-x-3.5 max-w-full font-brand font-bold uppercase leading-none tracking-[0.06em]"
               aria-label={event.name}
             >
-              <span className="inline-block">{event.shortName}</span>{" "}
-              <span className="inline-block font-sans text-[0.55em] font-medium not-italic tabular-nums text-gold tracking-normal">
+              <span className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+                {event.shortName}
+              </span>
+              <span className="font-brand text-xl sm:text-2xl md:text-3xl font-semibold text-gold tracking-[0.14em]">
                 {event.edition}
               </span>
             </h2>

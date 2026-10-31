@@ -41,33 +41,66 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-plum/90 via-plum/30 to-transparent" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-32 md:px-10 md:pb-28">
-        <img src={logo.src} alt={logo.alt} className="hero-in h-12 w-auto md:h-16" />
-        <h1 className="hero-in mt-4 font-brand text-[clamp(2.4rem,6.5vw,5.2rem)] font-bold uppercase leading-[0.95] tracking-[0.06em] text-ivory text-glow">
-          {event.shortName}
-          <span className="ml-3 align-top font-sans text-[0.38em] font-medium not-italic tabular-nums text-gold tracking-normal">
+        {/* Brand logo */}
+        <div className="hero-in">
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            className="h-11 w-auto sm:h-14 md:h-16 object-contain"
+          />
+        </div>
+
+        {/* Cohesive, baseline-aligned brand title with edition */}
+        <h1 className="hero-in mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1 font-brand font-bold uppercase tracking-[0.06em] text-ivory text-glow">
+          <span className="text-[clamp(2.5rem,7vw,5.5rem)] leading-none">{event.shortName}</span>
+          <span className="font-brand text-[clamp(1.2rem,3.2vw,2.4rem)] font-semibold tracking-[0.14em] text-gold drop-shadow-[0_0_24px_rgba(230,160,68,0.55)]">
             {event.edition}
           </span>
         </h1>
-        <p className="hero-in mt-6 max-w-xl font-serif text-2xl italic text-ivory/85 md:text-3xl">
-          {event.tagline} {event.subline}
+
+        {/* Poetic Tagline */}
+        <p className="hero-in mt-5 max-w-2xl font-serif text-2xl italic leading-relaxed text-ivory/90 sm:text-3xl">
+          {event.tagline} <span className="font-normal not-italic text-gold">{event.subline}</span>
         </p>
-        <div className="hero-in mt-10 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-ivory/15 pt-6">
-          <Diya className="w-12" />
+
+        {/* Event details bottom bar with prominent traditional Diya */}
+        <div className="hero-in mt-12 flex flex-wrap items-center gap-x-8 gap-y-6 border-t border-ivory/15 pt-8 sm:gap-x-12">
+          {/* Authentic Terracotta Diya with warm illumination */}
+          <div className="flex items-center pr-2">
+            <Diya className="w-20 sm:w-24 drop-shadow-[0_0_28px_rgba(230,160,68,0.5)]" />
+          </div>
+
+          <span className="hidden h-10 w-px bg-ivory/15 sm:block" />
+
           {event.date && (
-            <div>
-              <p className="chapter-label !text-[0.6rem] text-ivory/50">Date</p>
-              <p className="mt-1 font-sans text-lg font-semibold tabular-nums text-ivory">
+            <div className="flex flex-col">
+              <span className="chapter-label !text-[0.62rem] uppercase tracking-widest text-gold/80 font-semibold">
+                Date
+              </span>
+              <span className="mt-1 font-sans text-lg sm:text-xl font-bold tabular-nums text-ivory">
                 {event.date}
-              </p>
+              </span>
             </div>
           )}
-          <div>
-            <p className="chapter-label !text-[0.6rem] text-ivory/50">Venue</p>
-            <p className="mt-1 font-display text-lg text-ivory">{event.venue}</p>
+
+          <span className="hidden h-10 w-px bg-ivory/15 md:block" />
+
+          <div className="flex flex-col">
+            <span className="chapter-label !text-[0.62rem] uppercase tracking-widest text-gold/80 font-semibold">
+              Venue
+            </span>
+            <span className="mt-1 font-display text-lg sm:text-xl text-ivory">{event.venue}</span>
           </div>
-          <div>
-            <p className="chapter-label !text-[0.6rem] text-ivory/50">Time</p>
-            <p className="mt-1 font-sans text-base tabular-nums text-gold">{event.time}</p>
+
+          <span className="hidden h-10 w-px bg-ivory/15 md:block" />
+
+          <div className="flex flex-col">
+            <span className="chapter-label !text-[0.62rem] uppercase tracking-widest text-gold/80 font-semibold">
+              Time
+            </span>
+            <span className="mt-1 font-sans text-base sm:text-lg font-semibold tabular-nums text-gold">
+              {event.time}
+            </span>
           </div>
         </div>
       </div>
