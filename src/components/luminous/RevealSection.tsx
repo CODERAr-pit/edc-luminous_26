@@ -126,7 +126,7 @@ export function RevealSection() {
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left: Rangoli artwork in responsive square with interactive fireworks easter egg */}
-          <div className="flex items-center justify-center lg:col-span-5">
+          <div className="flex flex-col items-center justify-center lg:col-span-5">
             <div
               ref={rangoliRef}
               role="button"
@@ -139,6 +139,8 @@ export function RevealSection() {
                   triggerFireworks();
                 }
               }}
+              title="Double click or double tap to celebrate!"
+              aria-label="Interactive Rangoli art - double click or double tap to trigger Diwali celebration"
               className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-transform duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.01] active:scale-[0.99] ${
                 isRangoliPulsing ? "scale-105" : ""
               }`}
@@ -263,6 +265,19 @@ export function RevealSection() {
                 })}
               </svg>
             </div>
+
+            {/* Hint under Rangoli */}
+            <button
+              type="button"
+              onClick={triggerFireworks}
+              className="mt-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs sm:text-sm font-serif italic text-gold transition-all duration-300 hover:border-gold/60 hover:bg-gold/20 hover:scale-105 active:scale-95 cursor-pointer select-none shadow-xs group"
+              title="Double click or double tap the rangoli to celebrate"
+              aria-label="Double click or double tap the rangoli to celebrate"
+            >
+              <Sparkles className="size-3.5 text-gold shrink-0 animate-pulse group-hover:rotate-12 transition-transform" />
+              <span>Double click or double tap the rangoli to celebrate</span>
+              <span className="text-[0.7rem] not-italic text-gold opacity-80 group-hover:opacity-100 transition-opacity">✨</span>
+            </button>
           </div>
 
           {/* Right: Event Details & Brand Lockup */}
@@ -314,8 +329,8 @@ export function RevealSection() {
                 {!event.registrationOpen && (
                   <span className="font-display text-xl text-gold">Coming soon</span>
                 )}
-                <RegisterButton className="h-11 px-8" />
-                <p className="text-xs text-muted-foreground text-center lg:text-left">
+                <RegisterButton className="h-12 sm:h-14 px-8 sm:px-12 text-base sm:text-lg font-semibold tracking-wide shadow-md hover:shadow-xl hover:scale-[1.02] transition-all [&_svg]:size-5" />
+                <p className="text-xs sm:text-sm text-muted-foreground text-center lg:text-left">
                   Entry Fee:{" "}
                   <strong className="font-semibold text-foreground">₹100 per team</strong> · Teams
                   of 4

@@ -457,9 +457,9 @@ function FormStep({
         type="submit"
         size="lg"
         id="reg-next-btn"
-        className="w-full h-12 bg-gold text-plum font-semibold text-sm uppercase tracking-widest hover:bg-gold/90 transition-all hover:shadow-[0_0_32px_oklch(0.82_0.13_75/0.5)]"
+        className="w-full h-13 sm:h-14 bg-gold text-plum font-semibold text-sm sm:text-base uppercase tracking-widest hover:bg-gold/90 transition-all hover:shadow-[0_0_32px_oklch(0.82_0.13_75/0.5)] cursor-pointer"
       >
-        Continue to Payment <ArrowUpRight className="size-4" />
+        Continue to Payment <ArrowUpRight className="size-4.5" />
       </Button>
     </form>
   );
@@ -648,18 +648,18 @@ function PaymentStep({
           variant="outline"
           size="lg"
           id="payment-back-btn"
-          className="h-12 flex-1 border-border/60 text-muted-foreground hover:text-foreground"
+          className="h-13 sm:h-14 flex-1 border-border/60 text-muted-foreground hover:text-foreground text-sm sm:text-base cursor-pointer"
           onClick={onBack}
           disabled={isSubmitting}
         >
-          <ArrowLeft className="size-4" /> Back
+          <ArrowLeft className="size-4.5" /> Back
         </Button>
         <Button
           type="submit"
           size="lg"
           id="payment-submit-btn"
           disabled={isSubmitting}
-          className="h-12 flex-[2] bg-gold text-plum font-semibold text-sm uppercase tracking-widest hover:bg-gold/90 transition-all hover:shadow-[0_0_32px_oklch(0.82_0.13_75/0.5)] disabled:opacity-60"
+          className="h-13 sm:h-14 flex-[2] bg-gold text-plum font-semibold text-sm sm:text-base uppercase tracking-widest hover:bg-gold/90 transition-all hover:shadow-[0_0_32px_oklch(0.82_0.13_75/0.5)] disabled:opacity-60 cursor-pointer"
         >
           {isSubmitting ? (
             <>

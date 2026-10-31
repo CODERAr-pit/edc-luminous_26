@@ -26,11 +26,11 @@ export function RegisterButton({
       <Button asChild size={size} className={className}>
         {isInternal ? (
           <Link to={href}>
-            Register <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+            Register <ArrowUpRight className="size-4 sm:size-4.5 shrink-0" />
           </Link>
         ) : (
           <a href={href}>
-            Register <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+            Register <ArrowUpRight className="size-4 sm:size-4.5 shrink-0" />
           </a>
         )}
       </Button>
@@ -40,7 +40,7 @@ export function RegisterButton({
     <Dialog>
       <DialogTrigger asChild>
         <Button size={size} className={className}>
-          Register <ArrowUpRight className="size-3.5 sm:size-4 shrink-0" />
+          Register <ArrowUpRight className="size-4 sm:size-4.5 shrink-0" />
         </Button>
       </DialogTrigger>
       <DialogContent className="section-light max-w-[calc(100%-2rem)] sm:max-w-md">

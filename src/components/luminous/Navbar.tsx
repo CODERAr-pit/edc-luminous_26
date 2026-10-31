@@ -114,20 +114,19 @@ export function Navbar() {
         </nav>
 
         {/* Right — register + mobile menu */}
-        <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <RegisterButton
-            size="sm"
-            className="h-8 shrink-0 px-2.5 text-xs sm:h-9 sm:px-4 sm:text-sm"
+            className="h-9 shrink-0 px-3.5 text-xs font-semibold sm:h-10 sm:px-5 sm:text-sm tracking-wide shadow-sm"
           />
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 shrink-0 text-ivory hover:bg-white/10 hover:text-gold md:hidden"
+            className="h-9 w-9 shrink-0 text-ivory hover:bg-white/10 hover:text-gold md:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-label={open ? "Close navigation menu" : "Open navigation menu"}
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
           </Button>
         </div>
       </header>
@@ -155,7 +154,7 @@ export function Navbar() {
             );
           })}
           <div className="mt-4 border-t border-ivory/10 pt-6">
-            <RegisterButton className="h-11 w-full justify-center text-sm font-semibold" />
+            <RegisterButton className="h-12 w-full justify-center text-base font-semibold tracking-wide" />
           </div>
         </div>
       )}
