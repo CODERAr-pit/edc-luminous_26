@@ -41,8 +41,8 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-plum/90 via-plum/30 to-transparent" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-32 md:px-10 md:pb-28">
-        {/* Brand logo */}
-        <div className="hero-in">
+        {/* Brand logo (shifted slightly left for optical alignment with LUMINOUS title) */}
+        <div className="hero-in -ml-2 sm:-ml-3 md:-ml-3.5">
           <img
             src={logo.src}
             alt={logo.alt}
