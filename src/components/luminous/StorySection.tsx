@@ -145,18 +145,20 @@ export function StorySection() {
           <div className="ch-text md:col-span-5">
             <p className="chapter-label text-gold">Chapter 01 — Introduction</p>
             <h3 className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
-              A Diwali of{" "}
+              A celebration of{" "}
               <span className="font-serif font-normal italic text-gold">
-                creativity, community & light.
+                creativity, colours & community.
               </span>
             </h3>
             <div className="my-7 h-px w-16 bg-gold shadow-flame" />
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              LUMINOUS 10.0 is EDC NIT Durgapur's Diwali celebration — an evening where the campus
-              gathers to create, to come together, and to light up the night.
+              LUMINOUS 10.0, an initiative by the Entrepreneurship Development Cell, NIT Durgapur,
+              brings together artistic expression, teamwork, and festive spirit.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              Every flame is placed by hand. Every pattern is made by people who showed up.
+              Beginning with Pre-Luminous and culminating in the main event, LUMINOUS invites teams
+              to transform the floor into vibrant, theme-inspired designs through creativity and
+              collaboration.
             </p>
           </div>
         </article>
