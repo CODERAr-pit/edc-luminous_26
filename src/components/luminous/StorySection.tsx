@@ -182,12 +182,11 @@ export function StorySection() {
               one with colour, creativity, and joy.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              The handcrafted diyas are later sold, with the proceeds contributing towards the
-              children's welfare.
+              Each handcrafted diya carries a touch of imagination and a greater purpose, turning
+              simple creations into meaningful contributions towards the children's welfare.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              A little creativity, a little kindness, and a celebration that spreads light beyond
-              itself.
+              A celebration where little hands create, and every colour carries a little hope.
             </p>
           </div>
         </article>
