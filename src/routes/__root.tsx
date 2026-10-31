@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LUMINOUS — EDC NIT Durgapur" },
+      { title: "LUMINOUS 10.0 | EDC" },
       { name: "description", content: "A thousand little lights. One unforgettable night." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
