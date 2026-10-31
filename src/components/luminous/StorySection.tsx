@@ -216,7 +216,7 @@ export function StorySection() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
               <span>
-                Rangoli Entry Fee:{" "}
+                Entry Fee:{" "}
                 <strong className="font-semibold text-gold">₹100 per team</strong>
               </span>
               <span className="text-muted-foreground/40">·</span>
