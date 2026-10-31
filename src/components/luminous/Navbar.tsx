@@ -9,16 +9,56 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   useEffect(() => {
+    const calculateActiveSection = () => {
+      if (window.scrollY < 120) {
+        return "home";
+      }
+
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0 && window.scrollY >= h - 160) {
+        return "register";
+      }
+
+      const threshold = window.innerHeight * 0.35;
+      for (let i = chapters.length - 1; i >= 0; i--) {
+        const chapter = chapters[i];
+        if (!chapter) continue;
+        const el = document.getElementById(chapter.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= threshold) {
+            return chapter.id;
+          }
+        }
+      }
+
+      return "home";
+    };
+
     const onScroll = () => {
       const h = document.documentElement.scrollHeight - window.innerHeight;
       setScrolled(window.scrollY > window.innerHeight * 0.6);
       setProgress(h > 0 ? window.scrollY / h : 0);
+      setActiveSection(calculateActiveSection());
     };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash && chapters.some((c) => c.id === hash)) {
+        setActiveSection(hash);
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
   return (
@@ -34,6 +74,7 @@ export function Navbar() {
         {/* Left — logo lockup */}
         <a
           href="#home"
+          onClick={() => setActiveSection("home")}
           className="group flex min-w-0 shrink-0 items-center gap-2 text-ivory transition-opacity hover:opacity-95 sm:gap-3"
         >
           <img
@@ -53,18 +94,23 @@ export function Navbar() {
 
         {/* Centre — nav links strictly centered in the viewport */}
         <nav className="absolute left-1/2 -translate-x-1/2 hidden items-center gap-6 md:flex lg:gap-8">
-          {chapters.map((c) => (
-            <a
-              key={c.id}
-              href={`#${c.id}`}
-              className={cn(
-                "font-brand text-[0.84rem] font-semibold uppercase tracking-[0.16em] transition-all duration-200 hover:text-gold hover:tracking-[0.2em]",
-                c.id === "register" ? "text-gold font-bold" : "text-ivory/80",
-              )}
-            >
-              {c.label}
-            </a>
-          ))}
+          {chapters.map((c) => {
+            const isActive = activeSection === c.id;
+            return (
+              <a
+                key={c.id}
+                href={`#${c.id}`}
+                onClick={() => setActiveSection(c.id)}
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  "font-brand text-[0.84rem] font-semibold uppercase tracking-[0.16em] transition-all duration-200 hover:text-gold hover:tracking-[0.2em]",
+                  isActive ? "text-gold font-bold" : "text-ivory/80",
+                )}
+              >
+                {c.label}
+              </a>
+            );
+          })}
         </nav>
 
         {/* Right — register + mobile menu */}
@@ -88,17 +134,26 @@ export function Navbar() {
 
       {open && (
         <div className="fixed inset-0 z-40 flex flex-col justify-center gap-6 bg-plum px-8 md:hidden">
-          {chapters.map((c, i) => (
-            <a
-              key={c.id}
-              href={`#${c.id}`}
-              onClick={() => setOpen(false)}
-              className="font-brand text-3xl font-semibold uppercase tracking-wider text-ivory transition-colors hover:text-gold"
-            >
-              <span className="mr-4 align-top font-sans text-xs text-gold">0{i + 1}</span>
-              {c.label}
-            </a>
-          ))}
+          {chapters.map((c, i) => {
+            const isActive = activeSection === c.id;
+            return (
+              <a
+                key={c.id}
+                href={`#${c.id}`}
+                onClick={() => {
+                  setActiveSection(c.id);
+                  setOpen(false);
+                }}
+                className={cn(
+                  "font-brand text-3xl font-semibold uppercase tracking-wider transition-colors hover:text-gold",
+                  isActive ? "text-gold font-bold" : "text-ivory",
+                )}
+              >
+                <span className="mr-4 align-top font-sans text-xs text-gold">0{i + 1}</span>
+                {c.label}
+              </a>
+            );
+          })}
           <div className="mt-4 border-t border-ivory/10 pt-6">
             <RegisterButton className="h-11 w-full justify-center text-sm font-semibold" />
           </div>
