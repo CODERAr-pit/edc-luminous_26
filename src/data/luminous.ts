@@ -59,6 +59,18 @@ export const photos = {
     alt: "Students presenting table of hand-painted diyas at Block A",
     label: "Handcrafted Exhibition",
   } as Media,
+  rangoliOwl: {
+    type: "image",
+    src: "/images/rangoli-owl-clean.jpg",
+    alt: "Creative owl rangoli formed with earthen diyas and colourful chalk on paved ground",
+    label: "Owl Diya Rangoli",
+  } as Media,
+  rangoliApple: {
+    type: "image",
+    src: "/images/rangoli-apple-clean.jpg",
+    alt: "Apple logo and 'Think Different' tribute crafted with diyas and chalk",
+    label: "Think Different Rangoli",
+  } as Media,
   lighter: {
     type: "image",
     src: "/images/lighter.jpg",

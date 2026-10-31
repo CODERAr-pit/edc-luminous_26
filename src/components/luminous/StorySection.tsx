@@ -87,6 +87,18 @@ const RANGOLI_PHOTOS: SlideItem[] = [
     desc: "Student team presenting the collection of decorated diyas",
   },
   {
+    media: photos.rangoliOwl,
+    title: "Creative Owl Motif",
+    desc: "Playful owl rangoli crafted with earthen diyas and chalk on paved ground",
+    objectPosition: "center 48%",
+  },
+  {
+    media: photos.rangoliApple,
+    title: "Think Different Tribute",
+    desc: "Iconic Apple emblem outlined in glowing diyas and white chalk",
+    objectPosition: "center 55%",
+  },
+  {
     media: photos.lanternRelease,
     title: "Sky Lantern Release",
     desc: "Students releasing a glowing golden sky lantern into the night sky",
