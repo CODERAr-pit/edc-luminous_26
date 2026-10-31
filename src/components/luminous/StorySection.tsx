@@ -189,11 +189,6 @@ export function StorySection() {
               A little creativity, a little kindness, and a celebration that spreads light beyond
               itself.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2 text-xs">
-              <span className="rounded-full border border-border/60 bg-ivory/40 px-3 py-1 font-medium text-foreground">
-                BMEP × EDC Initiative
-              </span>
-            </div>
           </div>
         </article>
 
@@ -219,14 +214,13 @@ export function StorySection() {
               vision to life through the warm glow of diyas. A panel of judges evaluates these
               creations, recognising originality, artistry, and teamwork.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs">
-              <span className="rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 font-medium text-foreground">
+            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+              <span>
                 Rangoli Entry Fee:{" "}
                 <strong className="font-semibold text-gold">₹100 per team</strong>
               </span>
-              <span className="rounded-full border border-border/60 bg-ivory/40 px-3 py-1 font-medium text-muted-foreground">
-                Teams of 4
-              </span>
+              <span className="text-muted-foreground/40">·</span>
+              <span>Teams of 4</span>
             </div>
           </div>
         </article>

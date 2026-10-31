@@ -22,7 +22,7 @@ export function FooterSection() {
               <h3 className="font-brand text-xl font-bold tracking-[0.18em] uppercase text-ivory">
                 {event.shortName}
               </h3>
-              <span className="rounded-full border border-gold/30 bg-gold/10 px-2 py-0.5 font-sans text-[0.7rem] font-semibold tracking-normal text-gold tabular-nums">
+              <span className="font-sans text-xs font-semibold tracking-normal text-gold tabular-nums">
                 {event.edition}
               </span>
             </div>
@@ -67,7 +67,7 @@ export function FooterSection() {
             <p className="font-brand text-[0.72rem] font-bold tracking-[0.2em] uppercase text-gold">
               Connect With Us
             </p>
-            <div className="mt-4 flex flex-wrap gap-2.5">
+            <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2.5">
               {event.socials.map((s) => {
                 const Icon = SOCIAL_ICONS[s.label] || Globe;
                 return s.url ? (
@@ -76,16 +76,16 @@ export function FooterSection() {
                     href={s.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-2 rounded-full border border-ivory/15 bg-white/[0.03] px-4 py-2 font-sans text-xs font-medium tracking-wide text-ivory/85 transition-all duration-300 hover:border-gold/40 hover:bg-gold/10 hover:text-gold hover:shadow-sm"
+                    className="group inline-flex items-center gap-1.5 font-sans text-xs font-medium tracking-wide text-ivory/75 transition-colors duration-200 hover:text-gold"
                   >
-                    <Icon className="size-3.5 text-gold/80 transition-transform duration-300 group-hover:scale-110 group-hover:text-gold" />
+                    <Icon className="size-3.5 text-gold/80 transition-transform duration-200 group-hover:scale-110 group-hover:text-gold" />
                     <span>{s.label}</span>
-                    <ArrowUpRight className="size-3 text-ivory/40 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold" />
+                    <ArrowUpRight className="size-3 text-ivory/40 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold" />
                   </a>
                 ) : (
                   <span
                     key={s.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-ivory/10 px-3.5 py-1.5 font-sans text-xs text-ivory/40"
+                    className="inline-flex items-center gap-1.5 font-sans text-xs text-ivory/40"
                   >
                     <Icon className="size-3.5 opacity-50" />
                     <span>{s.label}</span>
