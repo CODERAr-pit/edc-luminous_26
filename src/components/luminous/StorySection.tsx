@@ -203,21 +203,21 @@ export function StorySection() {
             <ChapterSlideshow slides={RANGOLI_PHOTOS} interval={4500} />
           </div>
           <div className="ch-text md:col-span-5">
-            <p className="chapter-label text-antique">
-              Chapter 03 — Luminous · Rangoli Competition
-            </p>
+            <p className="chapter-label text-antique">Chapter 03 — Luminous</p>
             <h3 className="mt-5 font-display text-4xl font-semibold leading-tight md:text-5xl">
               The ground{" "}
               <span className="font-serif font-normal italic text-antique">becomes a canvas.</span>
             </h3>
             <div className="my-7 h-px w-16 bg-gold shadow-flame" />
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              In Luminous, college students form groups and create intricate floral and geometric
-              rangoli designs together across the campus floor.
+              At the heart of Luminous, teams of four come together to transform ordinary spaces
+              into illuminated works of art, arranging diyas into intricate designs inspired by a
+              shared theme.
             </p>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              A panel of judges evaluates every vibrant creation, celebrating the spirit of Diwali
-              and rewarding the most captivating artistry.
+              With creativity, precision, and collaboration at its core, each team brings its own
+              vision to life through the warm glow of diyas. A panel of judges evaluates these
+              creations, recognising originality, artistry, and teamwork.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-2.5 text-xs">
               <span className="rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1.5 font-medium text-foreground">
