@@ -284,6 +284,23 @@
   }
 }
 
+@keyframes progress-grow {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  .grain::after {
+    animation: none !important;
+    inset: 0 !important;
+    opacity: 0.04 !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

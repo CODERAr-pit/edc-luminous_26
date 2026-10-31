@@ -18,27 +18,14 @@ interface ChapterSlideshowProps {
 export function ChapterSlideshow({ slides, interval = 4500, className }: ChapterSlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [progress, setProgress] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-advance slideshow timer
+  // Auto-advance slideshow timer (pure timeout without aggressive interval re-renders)
   useEffect(() => {
     if (slides.length <= 1 || isPaused) {
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
       return;
     }
-
-    setProgress(0);
-    const stepTime = 50;
-    const totalSteps = interval / stepTime;
-
-    progressIntervalRef.current = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 0;
-        return prev + 100 / totalSteps;
-      });
-    }, stepTime);
 
     timerRef.current = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -46,23 +33,19 @@ export function ChapterSlideshow({ slides, interval = 4500, className }: Chapter
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
-      if (progressIntervalRef.current) clearInterval(progressIntervalRef.current);
     };
   }, [currentIndex, isPaused, interval, slides.length]);
 
   const goToSlide = (idx: number) => {
     setCurrentIndex(idx);
-    setProgress(0);
   };
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % slides.length);
-    setProgress(0);
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-    setProgress(0);
   };
 
   const activeSlide = slides[currentIndex];
@@ -98,11 +81,15 @@ export function ChapterSlideshow({ slides, interval = 4500, className }: Chapter
           <p className="mt-0.5 text-xs text-ivory/80 drop-shadow-sm">{activeSlide?.desc}</p>
         </div>
 
-        {/* Subtle timer progress line */}
-        <div className="absolute inset-x-0 bottom-0 z-30 h-1 bg-ivory/15">
+        {/* Subtle timer progress line (hardware-accelerated CSS animation, zero JS intervals) */}
+        <div className="absolute inset-x-0 bottom-0 z-30 h-1 bg-ivory/15 overflow-hidden">
           <div
-            className="h-full bg-gold transition-all duration-75 ease-linear shadow-flame"
-            style={{ width: `${isPaused ? 100 : progress}%` }}
+            key={`${currentIndex}-${isPaused}`}
+            className="h-full bg-gold shadow-flame"
+            style={{
+              width: isPaused ? "100%" : undefined,
+              animation: isPaused ? "none" : `progress-grow ${interval}ms linear forwards`,
+            }}
           />
         </div>
 

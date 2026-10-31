@@ -105,8 +105,8 @@ export function RevealSection() {
 
       {/* Floating Festive Toast (Easter Egg) */}
       {showCelebrationBadge && (
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in slide-in-from-top-4 duration-500 ease-out">
-          <div className="relative flex items-center gap-2.5 sm:gap-3 rounded-full border border-gold/45 bg-gradient-to-r from-plum/95 via-[#231217]/95 to-plum/95 px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_0_25px_rgba(230,160,68,0.35),0_10px_30px_rgba(0,0,0,0.65)] backdrop-blur-2xl ring-1 ring-gold/25 ring-inset">
+        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[130] pointer-events-none animate-in fade-in slide-in-from-top-4 duration-500 ease-out will-change-transform">
+          <div className="relative flex items-center gap-2.5 sm:gap-3 rounded-full border border-gold/45 bg-gradient-to-r from-plum/95 via-[#231217]/95 to-plum/95 px-4 sm:px-5 py-2 sm:py-2.5 shadow-[0_0_20px_rgba(230,160,68,0.3),0_8px_20px_rgba(0,0,0,0.6)] backdrop-blur-md ring-1 ring-gold/25 ring-inset">
             <div className="flex items-center shrink-0 -my-1">
               <Diya className="w-5 sm:w-6 shrink-0" />
             </div>
@@ -139,16 +139,20 @@ export function RevealSection() {
                   triggerFireworks();
                 }
               }}
-              className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-all duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.01] active:scale-[0.99] ${
-                isRangoliPulsing
-                  ? "scale-105 filter drop-shadow-[0_0_35px_rgba(230,160,68,0.7)]"
-                  : ""
+              className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-transform duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.01] active:scale-[0.99] ${
+                isRangoliPulsing ? "scale-105" : ""
               }`}
             >
               {/* Expanding golden shockwave ring on trigger */}
               {isRangoliPulsing && (
                 <span className="pointer-events-none absolute inset-0 rounded-full border-2 border-gold/70 animate-ping" />
               )}
+              {/* Hardware-accelerated festive ambient glow behind Rangoli on trigger */}
+              <div
+                className={`pointer-events-none absolute inset-6 rounded-full bg-gold/25 blur-xl transition-all duration-700 ease-out ${
+                  isRangoliPulsing ? "opacity-100 scale-110" : "opacity-0 scale-95"
+                }`}
+              />
               <svg
                 viewBox="0 0 400 400"
                 aria-hidden="true"
