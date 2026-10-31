@@ -62,6 +62,12 @@ const PRELIM_PHOTOS: SlideItem[] = [
     title: "Pure Celebration",
     desc: "Joyful smiles and hands raised in high spirits",
   },
+  {
+    media: photos.prelimTeam,
+    title: "BMEP × EDC Family",
+    desc: "Mentors and volunteers gathered together in shared purpose",
+    objectPosition: "center 42%",
+  },
 ];
 
 const RANGOLI_PHOTOS: SlideItem[] = [

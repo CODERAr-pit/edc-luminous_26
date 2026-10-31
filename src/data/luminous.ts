@@ -141,6 +141,12 @@ export const photos = {
     alt: "Pavilion filled with students and children decorating diyas together",
     label: "Workshop Pavilion",
   } as Media,
+  prelimTeam: {
+    type: "image",
+    src: "/images/prelim-bmep-edc-team.jpg",
+    alt: "BMEP and EDC volunteers and mentors gathered together on the pavilion bleachers",
+    label: "BMEP × EDC Team",
+  } as Media,
   prelimCheering: {
     type: "image",
     src: "/images/prelim-kids-cheering.jpg",

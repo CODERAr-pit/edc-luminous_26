@@ -150,7 +150,8 @@ export function ChapterSlideshow({ slides, interval = 4500, className }: Chapter
             slides.length === 3 && "grid-cols-3",
             slides.length === 4 && "grid-cols-4",
             slides.length === 5 && "grid-cols-5",
-            slides.length >= 6 && "grid-cols-6",
+            slides.length === 6 && "grid-cols-6",
+            slides.length >= 7 && "grid-cols-7",
           )}
           style={{ gridTemplateColumns: `repeat(${slides.length}, minmax(0, 1fr))` }}
         >
