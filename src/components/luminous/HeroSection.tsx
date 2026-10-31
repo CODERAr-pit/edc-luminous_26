@@ -65,9 +65,9 @@ export function HeroSection() {
 
         {/* Event details bottom bar with prominent traditional Diya */}
         <div className="hero-in mt-12 flex flex-wrap items-center gap-x-8 gap-y-6 border-t border-ivory/15 pt-8 sm:gap-x-12">
-          {/* Authentic Terracotta Diya with warm illumination */}
+          {/* Stylized Terracotta Diya with warm flame illumination */}
           <div className="flex items-center pr-2">
-            <Diya className="w-20 sm:w-24 drop-shadow-[0_0_28px_rgba(230,160,68,0.5)]" />
+            <Diya className="w-20 sm:w-24" />
           </div>
 
           <span className="hidden h-10 w-px bg-ivory/15 sm:block" />

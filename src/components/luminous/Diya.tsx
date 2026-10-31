@@ -8,268 +8,172 @@ interface DiyaProps {
 }
 
 /**
- * Traditional Indian Terracotta Diya (Mitti ka Diya).
+ * Stylized festive Indian Diya (Mitti ka Diya).
  *
- * Detailed earthenware craftsmanship featuring:
- * - Handcrafted clay silhouette with graceful curves and pedestal foot.
- * - Traditional fluted decorative scallops along the clay body.
- * - Sculpted rim with pinched front lip / spout where the wick rests.
- * - Hollow bowl holding an authentic pool of melted oil/ghee with liquid specular highlight.
- * - Twisted cotton wick (Baati) with glowing ember tip.
- * - Multi-layer living flame: electric blue combustion base, incandescent white core,
- *   vibrant golden-orange teardrop, fiery outer aura, and drifting micro-sparks.
- * - Warm pulsating ambient illumination casting light onto the ground and surrounding space.
+ * Designed with a soft, warm, cartoonish aesthetic matching the site's decorative theme:
+ * - Smooth terracotta clay bowl with a gentle curved pedestal foot.
+ * - Warm golden ghee/oil pool with liquid specular highlight.
+ * - Elegant sculpted pinched spout where the wick sits.
+ * - Soft festive dotted motif along the clay rim.
+ * - Expressive living cartoon flame with golden vermilion layers and white-hot heart.
+ * - Self-contained glow strictly localized to the flame (no upward spillage).
  */
-export function Diya({ lit = true, className, flameClass, glowClass }: DiyaProps) {
+export function Diya({ lit = true, className, flameClass }: DiyaProps) {
   return (
     <div
-      className={cn("relative aspect-[200/145] w-24 shrink-0 select-none", className)}
-      aria-label="Traditional glowing clay diya"
+      className={cn("relative aspect-[180/135] w-24 shrink-0 select-none", className)}
+      aria-label="Festive glowing clay diya"
       role="img"
     >
-      {lit && (
-        <>
-          {/* Layer 1: Ambient Wide Warm Radial Glow */}
-          <div
-            className={cn(
-              "pointer-events-none absolute left-1/2 top-[30%] h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full",
-              glowClass,
-            )}
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(255, 196, 64, 0.45) 0%, rgba(245, 124, 0, 0.22) 34%, rgba(225, 70, 10, 0.08) 58%, transparent 74%)",
-              animation: "diya-glow-pulse 2.5s ease-in-out infinite",
-            }}
-            aria-hidden="true"
-          />
-
-          {/* Layer 2: Core Radiant Halo */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-[30%] h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[6px]"
-            style={{
-              background:
-                "radial-gradient(circle at center, rgba(255, 240, 180, 0.75) 0%, rgba(255, 170, 30, 0.45) 45%, transparent 75%)",
-              animation: "diya-glow-pulse 1.8s ease-in-out infinite reverse",
-            }}
-            aria-hidden="true"
-          />
-        </>
-      )}
-
       <svg
-        viewBox="0 0 200 145"
+        viewBox="0 0 180 135"
         className="relative h-full w-full overflow-visible"
         aria-hidden="true"
       >
         <defs>
-          {/* Terracotta Clay Body Gradient */}
-          <linearGradient id="clayOuter" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#d96a3b" />
-            <stop offset="30%" stopColor="#b34822" />
-            <stop offset="70%" stopColor="#7a2a12" />
-            <stop offset="100%" stopColor="#4d1607" />
-          </linearGradient>
-
-          {/* Terracotta Rim with Warm Golden Highlight from Flame */}
-          <linearGradient id="clayRim" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#913316" />
-            <stop offset="25%" stopColor="#d96a3b" />
-            <stop offset="50%" stopColor={lit ? "#ffb347" : "#b34822"} />
-            <stop offset="75%" stopColor="#d96a3b" />
-            <stop offset="100%" stopColor="#913316" />
-          </linearGradient>
-
-          {/* Inner Hollow Clay Shadow */}
-          <radialGradient id="innerBowl" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#4a1506" />
-            <stop offset="70%" stopColor="#691f09" />
-            <stop offset="100%" stopColor="#8d2e11" />
+          {/* Subtle ground contact shadow */}
+          <radialGradient id="diyaGnd" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#000000" stopOpacity="0.25" />
+            <stop offset="60%" stopColor="#000000" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#000000" stopOpacity="0" />
           </radialGradient>
 
-          {/* Golden Ghee / Oil Pool with Warm Reflection */}
-          <radialGradient id="gheePool" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stopColor={lit ? "#ffe082" : "#8d4f1c"} />
-            <stop offset="40%" stopColor={lit ? "#ffb300" : "#6d3b12"} />
-            <stop offset="80%" stopColor={lit ? "#e65100" : "#4a2408"} />
-            <stop offset="100%" stopColor="#2e1403" />
-          </radialGradient>
-
-          {/* Flame Gradient - Main Body */}
-          <linearGradient id="flameMainGrad" x1="50%" y1="100%" x2="50%" y2="0%">
-            <stop offset="0%" stopColor="#d84315" />
-            <stop offset="25%" stopColor="#f4511e" />
-            <stop offset="55%" stopColor="#ff9800" />
-            <stop offset="85%" stopColor="#ffd54f" />
-            <stop offset="100%" stopColor="#ffffff" />
+          {/* Warm terracotta clay gradient */}
+          <linearGradient id="clayBody" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F27A45" />
+            <stop offset="40%" stopColor="#DC5D28" />
+            <stop offset="100%" stopColor="#9C3411" />
           </linearGradient>
 
-          {/* Flame Core Gradient - Incandescent */}
-          <linearGradient id="flameCoreGrad" x1="50%" y1="100%" x2="50%" y2="0%">
-            <stop offset="0%" stopColor="#ff9800" />
-            <stop offset="45%" stopColor="#ffeb3b" />
-            <stop offset="90%" stopColor="#ffffff" />
+          {/* Sculpted rim gradient with soft warm lighting */}
+          <linearGradient id="clayRimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FFA67A" />
+            <stop offset="40%" stopColor="#F3743E" />
+            <stop offset="100%" stopColor="#B43F18" />
           </linearGradient>
 
-          {/* Flame Base - Blue Combustion */}
-          <radialGradient id="flameBlueBase" cx="50%" cy="80%" r="50%">
-            <stop offset="0%" stopColor="#00e5ff" stopOpacity="0.85" />
-            <stop offset="55%" stopColor="#3d5afe" stopOpacity="0.65" />
-            <stop offset="100%" stopColor="#651fff" stopOpacity="0" />
+          {/* Inner bowl shadow */}
+          <radialGradient id="bowlHollow" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stopColor="#541705" />
+            <stop offset="70%" stopColor="#73230B" />
+            <stop offset="100%" stopColor="#8F2D10" />
           </radialGradient>
 
-          {/* Filter for Ember / Wick Glow */}
-          <filter id="emberGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-
-          {/* Ground Cast Shadow */}
-          <radialGradient id="diyaFloorShadow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(0,0,0,0.65)" />
-            <stop offset="60%" stopColor="rgba(0,0,0,0.3)" />
-            <stop offset="100%" stopColor="transparent" />
+          {/* Warm golden oil/ghee pool */}
+          <radialGradient id="oilGrad" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stopColor={lit ? "#FEF08A" : "#B45309"} />
+            <stop offset="35%" stopColor={lit ? "#FBBF24" : "#85350A"} />
+            <stop offset="80%" stopColor={lit ? "#D97706" : "#571D05"} />
+            <stop offset="100%" stopColor="#3E1404" />
           </radialGradient>
+
+          {/* Soft front rim highlight */}
+          <linearGradient id="frontRimHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#F3743E" />
+            <stop offset="50%" stopColor="#FFBD99" />
+            <stop offset="100%" stopColor="#F3743E" />
+          </linearGradient>
+
+          {/* Flame outer gradient */}
+          <linearGradient id="flameOut" x1="50%" y1="100%" x2="50%" y2="0%">
+            <stop offset="0%" stopColor="#EA580C" />
+            <stop offset="25%" stopColor="#F97316" />
+            <stop offset="65%" stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#FEF08A" />
+          </linearGradient>
+
+          {/* Flame core gradient */}
+          <linearGradient id="flameIn" x1="50%" y1="100%" x2="50%" y2="0%">
+            <stop offset="0%" stopColor="#F59E0B" />
+            <stop offset="55%" stopColor="#FEF08A" />
+            <stop offset="100%" stopColor="#FFFFFF" />
+          </linearGradient>
         </defs>
 
-        {/* 1. Ground Cast Shadow */}
-        <ellipse cx="100" cy="136" rx="66" ry="9" fill="url(#diyaFloorShadow)" />
+        {/* 1. Soft Ground Shadow */}
+        <ellipse cx="90" cy="126" rx="44" ry="5.5" fill="url(#diyaGnd)" />
 
-        {/* 2. Diya Pedestal Foot */}
-        <ellipse cx="100" cy="128" rx="36" ry="8" fill="#5c1d0a" />
-        <ellipse cx="100" cy="127" rx="33" ry="6.5" fill="#872c10" />
+        {/* 2. Foot Pedestal */}
+        <path d="M 64 116 C 64 123, 116 123, 116 116 Z" fill="#78240A" />
 
         {/* 3. Main Terracotta Clay Bowl */}
         <path
-          d="M20 74 C22 108 58 130 100 130 C142 130 178 108 180 74 C165 60 135 67 100 62 C65 67 35 60 20 74 Z"
-          fill="url(#clayOuter)"
+          d="M 16 66 C 16 106, 52 120, 90 120 C 128 120, 164 106, 164 66 C 146 54, 118 48, 90 44 C 62 48, 34 54, 16 66 Z"
+          fill="url(#clayBody)"
         />
 
-        {/* Decorative carved flutes on clay surface */}
-        <g stroke="#5c1c09" strokeWidth="1.2" opacity="0.45" fill="none">
-          <path d="M45 86 C55 106 72 122 92 128" />
-          <path d="M68 84 C76 102 86 118 97 129" />
-          <path d="M155 86 C145 106 128 122 108 128" />
-          <path d="M132 84 C124 102 114 118 103 129" />
+        {/* 4. Upper Sculpted Rim with Smooth Rounded Spout Peak at Center */}
+        <path
+          d="M 16 66 C 36 54, 64 48, 86 44 C 88.5 43.5, 91.5 43.5, 94 44 C 116 48, 144 54, 164 66 C 148 78, 122 84, 90 84 C 58 84, 32 78, 16 66 Z"
+          fill="url(#clayRimGrad)"
+        />
+
+        {/* 5. Inner Hollow Depth */}
+        <path
+          d="M 24 66 C 42 57, 68 52, 90 48 C 112 52, 138 57, 156 66 C 142 76, 118 80, 90 80 C 62 80, 38 76, 24 66 Z"
+          fill="url(#bowlHollow)"
+        />
+
+        {/* 6. Golden Ghee / Oil Pool */}
+        <ellipse cx="90" cy="67" rx="55" ry="10" fill="url(#oilGrad)" />
+        {lit && (
+          <ellipse cx="106" cy="66" rx="13" ry="2.2" fill="#FFFBEB" opacity="0.65" />
+        )}
+
+        {/* 7. Soft Front Rim Lip Curve (smooth 3D depth) */}
+        <path
+          d="M 16 66 C 36 76, 62 82, 90 82 C 118 82, 144 76, 164 66 C 148 74, 120 79, 90 79 C 60 79, 32 74, 16 66 Z"
+          fill="url(#frontRimHighlight)"
+          opacity="0.9"
+        />
+
+        {/* 8. Delicate Golden Festive Motif Dots */}
+        <g fill="#FDE047" opacity="0.9">
+          <circle cx="36" cy="71" r="1.5" />
+          <circle cx="50" cy="75" r="1.6" />
+          <circle cx="66" cy="77.5" r="1.7" />
+          <circle cx="90" cy="79" r="1.8" />
+          <circle cx="114" cy="77.5" r="1.7" />
+          <circle cx="130" cy="75" r="1.6" />
+          <circle cx="144" cy="71" r="1.5" />
         </g>
 
-        {/* 4. Sculpted Upper Rim */}
-        <path
-          d="M18 73 C30 58 65 64 94 56 C97 53 100 48 100 48 C100 48 103 53 106 56 C135 64 170 58 182 73 C168 88 138 82 100 84 C62 82 32 88 18 73 Z"
-          fill="url(#clayRim)"
-        />
-
-        {/* Inner Bowl Depth */}
-        <ellipse cx="100" cy="74" rx="70" ry="18" fill="url(#innerBowl)" />
-
-        {/* 5. Ghee / Oil Pool with Shimmering Light */}
-        <ellipse cx="100" cy="76" rx="58" ry="13.5" fill="url(#gheePool)" />
+        {/* 9. Cotton Wick Resting right at Spout Peak */}
+        <path d="M 90 54 Q 90 48 90 42" stroke="#381907" strokeWidth="3" strokeLinecap="round" />
         {lit && (
           <>
-            <ellipse
-              cx="100"
-              cy="74"
-              rx="18"
-              ry="4.5"
-              fill="#fff9c4"
-              opacity="0.75"
-              style={{
-                animation: "diya-core-flicker 1.8s ease-in-out infinite",
-              }}
-            />
-            <ellipse cx="100" cy="75" rx="8" ry="2" fill="#ffffff" opacity="0.9" />
+            <circle cx="90" cy="41" r="2.2" fill="#DC2626" />
+            <circle cx="90" cy="41" r="1.2" fill="#FEF08A" />
           </>
         )}
 
-        {/* 6. Front Pinched Lip / Spout */}
-        <path
-          d="M93 57 C97 52 100 48 100 48 C100 48 103 52 107 57 C103 60 97 60 93 57 Z"
-          fill="#d96a3b"
-          stroke="#7a2a12"
-          strokeWidth="0.8"
-        />
-
-        {/* 7. Twisted Cotton Wick (Baati) */}
-        <path
-          d="M100 74 C100.5 66 100 56 100 46"
-          stroke="#422006"
-          strokeWidth="3.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M100 74 C100.3 66 100 56 100 46"
-          stroke="#8d6e63"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-          opacity="0.6"
-        />
-
-        {/* Glowing Ember at Wick Tip */}
-        {lit && <circle cx="100" cy="45" r="2.2" fill="#ff3d00" filter="url(#emberGlow)" />}
-
-        {/* 8. Expressive Living Flame */}
+        {/* 10. Cartoon Flame (Self-contained warm glow strictly localized to flame) */}
         {lit && (
           <g
-            className={cn(flameClass)}
+            className={cn("diya-flame", flameClass)}
             style={{
-              transformOrigin: "100px 48px",
+              transformOrigin: "90px 42px",
               animation: "diya-flame-flicker 2.4s ease-in-out infinite",
             }}
           >
-            {/* Outer Warm Flame Halo */}
+            {/* Outer Soft Teardrop Flame */}
             <path
-              d="M100 8 C112 24 120 38 115 47 C110 55 90 55 85 47 C80 38 88 24 100 8 Z"
-              fill="rgba(255, 109, 0, 0.35)"
-              filter="blur(2.5px)"
+              d="M 90 4 C 107 18, 115 31, 109 40 C 103 47, 77 47, 71 40 C 65 31, 73 18, 90 4 Z"
+              fill="url(#flameOut)"
             />
 
-            {/* Main Flame Teardrop */}
+            {/* Inner Warm Glow Core */}
             <path
-              d="M100 10 C109 25 116 38 112 47 C108 55 92 55 88 47 C84 38 91 25 100 10 Z"
-              fill="url(#flameMainGrad)"
-            />
-
-            {/* Inner Vibrant Core */}
-            <path
-              d="M100 20 C105 30 109 38 107 45 C105 51 95 51 93 45 C91 38 95 30 100 20 Z"
-              fill="url(#flameCoreGrad)"
+              d="M 90 14 C 100 23, 105 32, 101 38 C 97 43, 83 43, 79 38 C 75 32, 80 23, 90 14 Z"
+              fill="url(#flameIn)"
               style={{
-                transformOrigin: "100px 48px",
-                animation: "diya-core-flicker 1.6s ease-in-out infinite alternate",
+                transformOrigin: "90px 42px",
+                animation: "diya-core-flicker 1.8s ease-in-out infinite alternate",
               }}
             />
 
-            {/* White-Hot Heart */}
-            <path
-              d="M100 30 C103 36 105 42 103 46 C101 49 99 49 97 46 C95 42 97 36 100 30 Z"
-              fill="#ffffff"
-              opacity="0.95"
-            />
-
-            {/* Blue Combustion Base */}
-            <path
-              d="M91 47 C92 42 96 39 100 39 C104 39 108 42 109 47 C106 50 94 50 91 47 Z"
-              fill="url(#flameBlueBase)"
-            />
-
-            {/* Rising Micro-Sparks */}
-            <circle
-              cx="99"
-              cy="8"
-              r="1.2"
-              fill="#ffe082"
-              style={{
-                animation: "diya-spark-1 2.2s ease-out infinite",
-              }}
-            />
-            <circle
-              cx="102"
-              cy="12"
-              r="0.9"
-              fill="#ffd54f"
-              style={{
-                animation: "diya-spark-2 2.8s ease-out 0.8s infinite",
-              }}
-            />
+            {/* Soft Glowing White-Cream Heart */}
+            <ellipse cx="90" cy="33" rx="4.5" ry="6.5" fill="#FFFFFF" opacity="0.95" />
           </g>
         )}
       </svg>

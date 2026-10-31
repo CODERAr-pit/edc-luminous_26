@@ -271,7 +271,7 @@ export function RevealSection() {
                 loading="lazy"
               />
               <span className="h-8 w-px bg-gold/40" aria-hidden="true" />
-              <Diya className="w-20 sm:w-24 shrink-0 drop-shadow-[0_0_24px_rgba(230,160,68,0.5)]" />
+              <Diya className="w-20 sm:w-24 shrink-0" />
             </div>
 
             <p className="chapter-label mt-8 text-gold">Event details</p>
