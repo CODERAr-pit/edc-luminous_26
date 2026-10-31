@@ -139,8 +139,8 @@ export function RevealSection() {
                   triggerFireworks();
                 }
               }}
-              title="Double click or double tap to celebrate!"
-              aria-label="Interactive Rangoli art - double click or double tap to trigger Diwali celebration"
+              title="Double click to see magic"
+              aria-label="Interactive Rangoli art - double click to see magic"
               className={`rangoli-stage group relative w-full max-w-[340px] cursor-pointer select-none transition-transform duration-500 sm:max-w-[420px] lg:max-w-[480px] hover:scale-[1.01] active:scale-[0.99] ${
                 isRangoliPulsing ? "scale-105" : ""
               }`}
@@ -266,17 +266,16 @@ export function RevealSection() {
               </svg>
             </div>
 
-            {/* Hint under Rangoli */}
+            {/* Editorial interactive prompt under Rangoli */}
             <button
               type="button"
               onClick={triggerFireworks}
-              className="mt-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs sm:text-sm font-serif italic text-gold transition-all duration-300 hover:border-gold/60 hover:bg-gold/20 hover:scale-105 active:scale-95 cursor-pointer select-none shadow-xs group"
-              title="Double click or double tap the rangoli to celebrate"
-              aria-label="Double click or double tap the rangoli to celebrate"
+              className="mt-3.5 sm:mt-4 inline-flex items-center gap-2.5 text-xs sm:text-[0.84rem] font-serif italic text-muted-foreground/80 hover:text-gold transition-colors duration-300 cursor-pointer select-none group"
+              title="Double click the rangoli or click here to see the magic"
             >
-              <Sparkles className="size-3.5 text-gold shrink-0 animate-pulse group-hover:rotate-12 transition-transform" />
-              <span>Double click or double tap the rangoli to celebrate</span>
-              <span className="text-[0.7rem] not-italic text-gold opacity-80 group-hover:opacity-100 transition-opacity">✨</span>
+              <span className="h-px w-5 sm:w-7 bg-gold/35 transition-all duration-300 group-hover:w-9 group-hover:bg-gold" />
+              <span className="tracking-wide">Double click to see magic</span>
+              <span className="h-px w-5 sm:w-7 bg-gold/35 transition-all duration-300 group-hover:w-9 group-hover:bg-gold" />
             </button>
           </div>
 
