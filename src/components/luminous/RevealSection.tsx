@@ -316,7 +316,7 @@ export function RevealSection() {
                 )}
                 <RegisterButton className="h-11 px-8" />
                 <p className="text-xs text-muted-foreground text-center lg:text-left">
-                  Rangoli Competition Entry Fee:{" "}
+                  Entry Fee:{" "}
                   <strong className="font-semibold text-foreground">₹100 per team</strong> · Teams
                   of 4
                 </p>
