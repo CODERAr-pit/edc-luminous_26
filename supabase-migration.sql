@@ -18,7 +18,9 @@ create table if not exists public.luminous_registrations (
   submitted_at    timestamptz not null default now()
 );
 
--- Ensure the column exists if the table was already created previously
+-- Backfill projects where this field was added after the table was originally
+-- created. Existing rows receive an empty value; new registrations write the
+-- submitted team leader registration number.
 alter table public.luminous_registrations
   add column if not exists team_leader_reg_no text not null default '';
 
@@ -31,6 +33,10 @@ alter table public.luminous_registrations
 
 -- Enable Row Level Security
 alter table public.luminous_registrations enable row level security;
+
+-- Make this migration safe to run again after a partial or previous setup.
+drop policy if exists "Allow anon insert" on public.luminous_registrations;
+drop policy if exists "Allow authenticated select" on public.luminous_registrations;
 
 -- Allow inserts from anon (public registration form)
 create policy "Allow anon insert"
@@ -54,6 +60,9 @@ update storage.buckets
 set file_size_limit = 5242880,
     allowed_mime_types = array['image/jpeg', 'image/png', 'image/webp']
 where id = 'payment-screenshots';
+
+drop policy if exists "Allow anon payment screenshot uploads" on storage.objects;
+drop policy if exists "Allow authenticated payment screenshot reads" on storage.objects;
 
 create policy "Allow anon payment screenshot uploads"
   on storage.objects for insert to anon

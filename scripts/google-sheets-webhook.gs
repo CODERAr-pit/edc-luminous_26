@@ -46,28 +46,55 @@ function getSheet() {
   const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = spreadsheet.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = spreadsheet.insertSheet(SHEET_NAME);
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow([
-      "Received At",
-      "Team Name",
-      "Leader",
-      "Leader Reg No",
-      "Email",
-      "WhatsApp",
-      "Member 1",
-      "Member 1 Number",
-      "Member 2",
-      "Member 2 Number",
-      "Member 3",
-      "Member 3 Number",
-      "Screenshot Path",
-      "Submitted At",
-      "Status",
-      "Notes",
-    ]);
-    sheet.setFrozenRows(1);
-  }
+  ensureHeaders(sheet);
   return sheet;
+}
+
+/**
+ * Adds columns introduced after the sheet was first deployed without
+ * disturbing existing registration rows. This is important because an
+ * existing sheet may still have the old header layout (without Leader Reg No).
+ */
+function ensureHeaders(sheet) {
+  const headers = [
+    "Received At",
+    "Team Name",
+    "Leader",
+    "Leader Reg No",
+    "Email",
+    "WhatsApp",
+    "Member 1",
+    "Member 1 Number",
+    "Member 2",
+    "Member 2 Number",
+    "Member 3",
+    "Member 3 Number",
+    "Screenshot Path",
+    "Submitted At",
+    "Status",
+    "Notes",
+  ];
+
+  if (sheet.getLastRow() === 0) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    sheet.setFrozenRows(1);
+    return;
+  }
+
+  const currentHeaders = sheet
+    .getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1))
+    .getValues()[0]
+    .map(String);
+  if (currentHeaders.indexOf("Leader Reg No") !== -1) return;
+
+  const leaderIndex = currentHeaders.indexOf("Leader");
+  if (leaderIndex === -1) {
+    throw new Error('The Registrations sheet is missing the required "Leader" column');
+  }
+
+  // Insert directly after Leader so old Email/WhatsApp data remains aligned.
+  sheet.insertColumnAfter(leaderIndex + 1);
+  sheet.getRange(1, leaderIndex + 2).setValue("Leader Reg No");
 }
 
 function json(value) {
