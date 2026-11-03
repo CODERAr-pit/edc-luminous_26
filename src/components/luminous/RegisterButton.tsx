@@ -45,10 +45,10 @@ export function RegisterButton({
       </DialogTrigger>
       <DialogContent className="section-light max-w-[calc(100%-2rem)] sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Registration coming soon</DialogTitle>
+          <DialogTitle>Registration period over</DialogTitle>
           <DialogDescription>
-            Registration for LUMINOUS 10.0 has not opened yet. The registration link will be
-            available here when it opens.
+            The registration period for LUMINOUS 10.0 is over. Registrations are no longer being
+            accepted.
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

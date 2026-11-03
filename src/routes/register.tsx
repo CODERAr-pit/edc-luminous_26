@@ -47,6 +47,68 @@ export const Route = createFileRoute("/register")({
 type Step = "form" | "payment" | "success";
 
 function RegisterPage() {
+  if (!event.registrationOpen) {
+    return <RegistrationClosedState />;
+  }
+
+  return <RegistrationForm />;
+}
+
+function RegistrationClosedState() {
+  return (
+    <div className="min-h-screen bg-background text-foreground font-sans">
+      <div className="grain pointer-events-none fixed inset-0 z-50" aria-hidden="true" />
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% -10%, oklch(0.7 0.16 50 / 0.18) 0%, transparent 70%)",
+        }}
+      />
+
+      <header className="relative z-10 border-b border-border/40 px-6 py-4 sm:py-5">
+        <div className="mx-auto flex max-w-4xl items-center justify-between">
+          <Link to="/" className="flex items-center gap-3 group">
+            <ArrowLeft className="size-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              className="h-7 w-auto object-contain"
+              loading="eager"
+            />
+          </Link>
+          <span className="font-brand text-sm font-semibold uppercase tracking-widest text-gold">
+            {event.name}
+          </span>
+        </div>
+      </header>
+
+      <main className="relative z-10 flex min-h-[calc(100vh-73px)] items-center justify-center px-6 py-16">
+        <div className="w-full max-w-xl text-center">
+          <p className="chapter-label text-gold">Luminous Rangoli Competition</p>
+          <h1 className="mt-4 font-brand text-4xl font-bold uppercase tracking-[0.06em] sm:text-5xl">
+            Registration closed
+          </h1>
+          <p className="mx-auto mt-5 max-w-md font-serif text-xl italic text-gold">
+            Thank you for your interest in Luminous.
+          </p>
+          <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-muted-foreground">
+            Registrations for the rangoli competition are no longer being accepted.
+          </p>
+          <Link
+            to="/"
+            className="mt-9 inline-flex items-center border-b border-gold/60 pb-1 text-sm font-semibold uppercase tracking-[0.16em] text-gold transition-colors hover:border-gold hover:text-foreground"
+          >
+            Return home
+          </Link>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function RegistrationForm() {
   const [step, setStep] = useState<Step>("form");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -416,7 +478,8 @@ function FormStep({
             <div key={m.id} className="rounded-lg border border-border/50 p-5 space-y-4">
               <div className="flex items-center justify-between">
                 <p className="chapter-label !text-[0.65rem] text-muted-foreground">
-                  {m.label} {m.optional && <span className="text-gold font-normal">(Optional)</span>}
+                  {m.label}{" "}
+                  {m.optional && <span className="text-gold font-normal">(Optional)</span>}
                 </p>
                 {m.optional && (
                   <span className="text-[0.68rem] text-muted-foreground/70">Optional</span>
