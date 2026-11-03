@@ -248,8 +248,8 @@ export const event = {
   venue: "New Academic Building (NAB)",
   time: "6:00 PM onwards",
   entryFee: "₹100 per team",
-  registrationOpen: true,
-  registrationUrl: "/register",
+  registrationOpen: false,
+  registrationUrl: "",
   contactEmail: "",
   socials: [
     { label: "Instagram", url: "https://www.instagram.com/edc_nitd/" },
